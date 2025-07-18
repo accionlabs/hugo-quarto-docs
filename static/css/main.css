@@ -793,6 +793,189 @@ table tr:nth-child(even) {
     }
 }
 
+/* Mobile styles */
+@media (max-width: 768px) {
+    /* Header modifications for mobile */
+    .header-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .header-text {
+        flex: 1;
+    }
+    
+    .header-text h1 {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+    
+    .header-text p {
+        font-size: 0.9rem;
+        margin: 0.2rem 0 0 0;
+    }
+    
+    /* Mobile navigation toggle button */
+    .mobile-nav-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        z-index: 1001;
+        position: relative;
+    }
+    
+    .hamburger-line {
+        width: 100%;
+        height: 3px;
+        background-color: #333;
+        transition: all 0.3s ease;
+        transform-origin: center;
+    }
+    
+    /* Animate hamburger to X when active */
+    .mobile-nav-toggle.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .mobile-nav-toggle.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-nav-toggle.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    /* Hide main navigation on mobile */
+    nav {
+        display: none;
+    }
+    
+    /* Content wrapper adjustments for mobile */
+    .content-wrapper {
+        display: block;
+        min-height: auto;
+    }
+    
+    /* Sidebar mobile behavior */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: #f8f9fa;
+        border-right: 1px solid #e9ecef;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+        padding: 1rem;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar.mobile-open {
+        left: 0;
+    }
+    
+    /* Overlay when sidebar is open */
+    .sidebar.mobile-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
+    
+    /* Content main adjustments for mobile */
+    .content-main {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+        margin: 0;
+    }
+    
+    .home-main {
+        padding: 1rem;
+    }
+    
+    /* Breadcrumbs mobile styling */
+    .breadcrumbs {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Mobile navigation styling */
+    .nav-header {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e9ecef;
+        margin-bottom: 1rem;
+    }
+    
+    .nav-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .nav-item {
+        padding: 0.5rem 0;
+    }
+    
+    .nav-item a {
+        font-size: 0.95rem;
+        padding: 0.5rem 0;
+    }
+    
+    /* Export links mobile styling */
+    .export-links {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .export-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        min-width: auto;
+    }
+    
+    /* Tables mobile responsiveness */
+    table {
+        font-size: 0.9rem;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+    
+    table thead,
+    table tbody,
+    table tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    table th,
+    table td {
+        padding: 0.5rem;
+    }
+}
+
+/* Hide mobile nav toggle on desktop */
+@media (min-width: 769px) {
+    .mobile-nav-toggle {
+        display: none;
+    }
+}
+
 /* Print styles - hide header, navigation, sidebar, and footer */
 @media print {
     /* Hide site header */

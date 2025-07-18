@@ -28,7 +28,7 @@
     <div class="main-container">
         <!-- Side Navigation and Main Content -->
         <div class="content-wrapper">
-            <aside class="sidebar">
+            <aside class="sidebar" id="sidebar">
                 {{ partial "sidebar-nav.html" . }}
             </aside>
             
@@ -97,6 +97,62 @@
                 }
             }
         }
+        
+        // Mobile navigation toggle
+        function toggleMobileNav() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.getElementById('mobile-nav-toggle');
+            
+            if (sidebar && toggleButton) {
+                sidebar.classList.toggle('mobile-open');
+                toggleButton.classList.toggle('active');
+                
+                // Prevent body scroll when sidebar is open on mobile
+                if (sidebar.classList.contains('mobile-open')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+        
+        // Close mobile nav when clicking outside
+        function closeMobileNavOnOutsideClick(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.getElementById('mobile-nav-toggle');
+            
+            if (sidebar && toggleButton && sidebar.classList.contains('mobile-open')) {
+                if (!sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
+                    sidebar.classList.remove('mobile-open');
+                    toggleButton.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+        
+        // Initialize mobile navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('mobile-nav-toggle');
+            if (toggleButton) {
+                toggleButton.addEventListener('click', toggleMobileNav);
+            }
+            
+            // Close mobile nav when clicking outside
+            document.addEventListener('click', closeMobileNavOnOutsideClick);
+            
+            // Close mobile nav on window resize to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    const sidebar = document.getElementById('sidebar');
+                    const toggleButton = document.getElementById('mobile-nav-toggle');
+                    if (sidebar && toggleButton) {
+                        sidebar.classList.remove('mobile-open');
+                        toggleButton.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
