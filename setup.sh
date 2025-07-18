@@ -78,6 +78,15 @@ check_requirements() {
         print_info "Visit: https://git-scm.com/downloads"
     fi
     
+    # Check Pandoc (optional but recommended)
+    if command_exists pandoc; then
+        local pandoc_version=$(pandoc --version | head -n 1)
+        print_status "Pandoc found: $pandoc_version"
+    else
+        print_warning "Pandoc not found. Grid table conversion will use Python fallback."
+        print_info "Install with: brew install pandoc (recommended for better table conversion)"
+    fi
+    
     if [ "$requirements_met" = false ]; then
         print_error "Please install the required dependencies and run this script again."
         exit 1

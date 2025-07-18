@@ -19,6 +19,7 @@ A modern documentation system that combines Hugo's fast static site generation w
 
 - [Hugo](https://gohugo.io/installation/) (v0.115.0+)
 - [Quarto](https://quarto.org/docs/get-started/) (v1.3.0+)
+- [Pandoc](https://pandoc.org/installing.html) (optional but recommended for better table conversion)
 
 ### Installation
 
