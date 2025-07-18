@@ -1,0 +1,92 @@
+---
+title: "Sample Quarto Document"
+description: "Demonstrates Quarto features and export capabilities"
+quarto_exports: ["docx", "pptx"]
+---
+
+# Sample Quarto Document
+
+This is a sample document that demonstrates the power of Quarto integration in this documentation system.
+
+## Features Demonstrated
+
+### 1. Rich Text Formatting
+
+You can use **bold text**, *italic text*, and `code snippets` in your content.
+
+### 2. Code Blocks
+
+```python
+def hello_world():
+    print("Hello, World!")
+    return True
+
+# This code will be syntax highlighted
+result = hello_world()
+```
+
+### 3. Tables
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| Export to DOCX | Generate Word documents | ✅ |
+| Export to PPTX | Generate PowerPoint presentations | ✅ |
+| Mermaid Diagrams | Create flowcharts and diagrams | ✅ |
+| Math Equations | LaTeX math rendering | ✅ |
+
+### 4. Lists
+
+**Ordered Lists:**
+1. First item
+2. Second item
+3. Third item
+
+**Unordered Lists:**
+- Bullet point one
+- Bullet point two
+  - Nested bullet
+  - Another nested bullet
+
+### 5. Diagrams
+
+```mermaid
+graph TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> B
+    C --> E[End]
+```
+
+### 6. Math Equations
+
+You can include inline math like $E = mc^2$ or display math:
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+
+### 7. Blockquotes
+
+> This is a blockquote. It can be used to highlight important information or quotes from other sources.
+
+### 8. Links and References
+
+- [Hugo Documentation](https://gohugo.io/documentation/)
+- [Quarto Documentation](https://quarto.org/docs/)
+- [Mermaid Documentation](https://mermaid.js.org/)
+
+## Export Options
+
+This document can be exported to:
+- **DOCX**: Click the DOCX button above to download a Word document
+- **PPTX**: Click the PPTX button above to download a PowerPoint presentation
+- **Print**: Click the Print button for a clean, formatted print version
+
+## Conclusion
+
+This documentation system combines the best of both worlds:
+- Hugo's fast static site generation
+- Quarto's powerful document processing and export capabilities
+
+Start creating your own documentation by replacing this sample content with your own files!

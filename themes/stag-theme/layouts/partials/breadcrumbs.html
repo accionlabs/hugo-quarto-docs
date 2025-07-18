@@ -1,0 +1,47 @@
+{{ if not .IsHome }}
+<nav class="breadcrumbs" aria-label="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="{{ "/" | relURL }}">🏠 Home</a>
+        </li>
+        
+        {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
+        {{ $pathParts := split (strings.TrimSuffix "/" $url) "/" }}
+        {{ $currentPath := "/" }}
+        
+        {{ range $index, $element := $pathParts }}{{ if ne $element "" }}
+            {{ $currentPath = printf "%s%s/" $currentPath $element }}
+            {{ $isLast := eq $index (sub (len $pathParts) 1) }}
+            
+            {{ if $isLast }}
+                <!-- Current page (last breadcrumb) -->
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span>{{ $.Title }}</span>
+                </li>
+            {{ else }}
+                <!-- Intermediate breadcrumb with link -->
+                {{ $sectionPage := $.Site.GetPage $currentPath }}
+                {{ if $sectionPage }}
+                    <li class="breadcrumb-item">
+                        <a href="{{ $sectionPage.Permalink }}">{{ $sectionPage.Title }}</a>
+                    </li>
+                {{ else }}
+                    <!-- Fallback: try to get section index -->
+                    {{ $sectionIndex := printf "%s_index.md" $currentPath }}
+                    {{ $indexPage := $.Site.GetPage $sectionIndex }}
+                    {{ if $indexPage }}
+                        <li class="breadcrumb-item">
+                            <a href="{{ $indexPage.Permalink }}">{{ $indexPage.Title }}</a>
+                        </li>
+                    {{ else }}
+                        <!-- Last resort: create link from path -->
+                        <li class="breadcrumb-item">
+                            <a href="{{ $currentPath | relURL }}">{{ humanize $element }}</a>
+                        </li>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}{{ end }}
+    </ol>
+</nav>
+{{ end }}

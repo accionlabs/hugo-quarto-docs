@@ -1,0 +1,63 @@
+{{ define "main" }}
+<article class="content">
+    <header>
+        <h4>{{ .Title }}</h4>
+        {{ if .Params.description }}
+        <p class="description">{{ .Params.description }}</p>
+        {{ end }}
+        
+        {{ if .Params.date }}
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+        {{ end }}
+        
+        {{ if .Params.author }}
+        <p class="author">By: {{ .Params.author }}</p>
+        {{ end }}
+        
+        {{ if .Params.team }}
+        <div class="team">
+            <strong>Team:</strong>
+            {{ range .Params.team }}
+            <span class="team-member">{{ . }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+    </header>
+    
+    <!-- Export links -->
+    {{ if .Params.quarto_exports }}
+    <div class="export-links">
+        <h3>Download Formats:</h3>
+        {{ range .Params.quarto_exports }}
+        {{ $exportFile := printf "/%s/%s.%s" (strings.TrimSuffix "/" (path.Dir $.File.Path)) (path.BaseName $.File.Path) . }}
+        <a href="{{ $exportFile }}" class="export-link export-{{ . }}" download>
+            <i class="icon-{{ . }}"></i> {{ . | upper }}
+        </a>
+        {{ end }}
+        <button onclick="window.print()" class="export-link export-print" type="button">
+            <i class="icon-print">🖨️</i> PRINT
+        </button>
+    </div>
+    {{ end }}
+    
+    <!-- Content -->
+    <div class="content-body">
+        {{ .Content }}
+    </div>
+    
+    <!-- Comments -->
+    {{ if .Site.Params.stag.enable_comments }}
+    {{ partial "comments.html" . }}
+    {{ end }}
+    
+    <!-- Navigation -->
+    <nav class="content-nav">
+        {{ if .PrevInSection }}
+        <a href="{{ .PrevInSection.Permalink }}" class="prev">← {{ .PrevInSection.Title }}</a>
+        {{ end }}
+        {{ if .NextInSection }}
+        <a href="{{ .NextInSection.Permalink }}" class="next">{{ .NextInSection.Title }} →</a>
+        {{ end }}
+    </nav>
+</article>
+{{ end }}

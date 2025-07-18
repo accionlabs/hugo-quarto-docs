@@ -1,0 +1,49 @@
+{{/* File Tree Partial - Lists all files in current section */}}
+{{ $currentPath := .CurrentPath }}
+{{ $allPages := .Site.AllPages }}
+{{ $currentSection := .CurrentSection }}
+
+{{/* Find all pages in current section */}}
+{{ $sectionPages := slice }}
+{{ range $allPages }}
+  {{ if hasPrefix .File.Path $currentPath }}
+    {{ $sectionPages = $sectionPages | append . }}
+  {{ end }}
+{{ end }}
+
+{{/* Group pages by directory */}}
+{{ $directories := dict }}
+{{ range $sectionPages }}
+  {{ $relativePath := strings.TrimPrefix $currentPath .File.Path }}
+  {{ $pathParts := split $relativePath "/" }}
+  {{ if gt (len $pathParts) 1 }}
+    {{ $dir := index $pathParts 0 }}
+    {{ $existing := index $directories $dir }}
+    {{ if not $existing }}
+      {{ $directories = merge $directories (dict $dir (slice .)) }}
+    {{ else }}
+      {{ $directories = merge $directories (dict $dir ($existing | append .)) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Render directory tree */}}
+{{ range $dirName, $dirPages := $directories }}
+  <li class="nav-folder">
+    <div class="nav-folder-header">
+      <span class="folder-icon">📁</span>
+      <span class="folder-name">{{ $dirName }}</span>
+      <span class="item-count">({{ len $dirPages }})</span>
+    </div>
+    <ul class="nav-subtree expanded">
+      {{ range $dirPages }}
+        <li class="nav-file" style="margin-left: 20px;">
+          <a href="{{ .Permalink }}" class="nav-link">
+            <span class="file-icon">📄</span>
+            <span class="file-name">{{ .Title }}</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </li>
+{{ end }}

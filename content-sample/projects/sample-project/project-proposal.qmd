@@ -1,0 +1,133 @@
+---
+title: "Sample Project Proposal"
+description: "Example project proposal with export capabilities"
+quarto_exports: ["docx", "pptx"]
+---
+
+# Sample Project Proposal
+
+**Project Name:** Sample Documentation System Implementation  
+**Date:** 2025-07-18  
+**Prepared by:** Documentation Team  
+
+## Executive Summary
+
+This proposal outlines the implementation of a modern documentation system that combines Hugo's static site generation with Quarto's document processing capabilities.
+
+## Project Objectives
+
+### Primary Goals
+1. **Centralize Documentation**: Create a single source of truth for all project documentation
+2. **Improve Collaboration**: Enable team members to collaborate on documentation efficiently
+3. **Enhance Accessibility**: Make documentation easily searchable and accessible
+4. **Enable Export**: Generate formatted documents for external sharing
+
+### Success Metrics
+- 📊 **Adoption Rate**: 90% of team members actively using the system
+- ⏱️ **Time Savings**: 50% reduction in document preparation time
+- 📈 **Content Quality**: Standardized formatting and structure across all documents
+- 🔄 **Collaboration**: Improved version control and change tracking
+
+## Technical Approach
+
+### Architecture Overview
+
+```mermaid
+graph TB
+    A[Markdown/Quarto Files] --> B[Hugo Static Site Generator]
+    A --> C[Quarto Document Processor]
+    B --> D[Web Documentation Site]
+    C --> E[Exported Documents]
+    E --> F[DOCX Files]
+    E --> G[PPTX Files]
+    D --> H[Team Access]
+    F --> I[Client Deliverables]
+    G --> I
+```
+
+### Key Components
+
+1. **Hugo Framework**
+   - Static site generation
+   - Fast build times
+   - Responsive design
+   - Search capabilities
+
+2. **Quarto Integration**
+   - Document processing
+   - Export capabilities
+   - Rich content support
+   - Cross-format compatibility
+
+3. **Custom Theme**
+   - Hierarchical navigation
+   - Print-friendly styles
+   - Mobile responsiveness
+   - Export button integration
+
+## Implementation Plan
+
+### Phase 1: Foundation (Week 1-2)
+- [ ] Set up Hugo framework
+- [ ] Configure Quarto integration
+- [ ] Implement basic theme
+- [ ] Create sample content
+
+### Phase 2: Features (Week 3-4)
+- [ ] Add export functionality
+- [ ] Implement navigation system
+- [ ] Add search capabilities
+- [ ] Mobile optimization
+
+### Phase 3: Deployment (Week 5-6)
+- [ ] Team training
+- [ ] Content migration
+- [ ] Performance optimization
+- [ ] Go-live preparation
+
+## Resource Requirements
+
+### Team Structure
+- **Project Lead**: 1 person (50% allocation)
+- **Developer**: 1 person (100% allocation)
+- **Content Manager**: 1 person (25% allocation)
+
+### Technology Stack
+- Hugo (Static Site Generator)
+- Quarto (Document Processor)
+- GitHub (Version Control)
+- Custom CSS/JavaScript
+
+## Budget Estimate
+
+| Category | Cost | Notes |
+|----------|------|-------|
+| Development | $15,000 | Custom theme and integration |
+| Infrastructure | $500/month | Hosting and domain |
+| Training | $2,000 | Team onboarding |
+| **Total** | **$17,000** | One-time setup cost |
+
+## Risk Assessment
+
+### Technical Risks
+- **Complexity**: Integration between Hugo and Quarto
+- **Mitigation**: Proof of concept and iterative development
+
+### Adoption Risks
+- **Resistance**: Team members may prefer existing tools
+- **Mitigation**: Comprehensive training and gradual migration
+
+## Next Steps
+
+1. **Approval**: Secure stakeholder approval for the project
+2. **Team Assembly**: Assign resources and form project team
+3. **Kickoff**: Begin Phase 1 implementation
+4. **Regular Reviews**: Weekly progress reviews and adjustments
+
+## Conclusion
+
+This documentation system will significantly improve our team's ability to create, maintain, and share high-quality documentation. The combination of modern web technologies with proven document processing capabilities provides a robust foundation for our documentation needs.
+
+---
+
+*This proposal demonstrates the system's capability to generate professional documents that can be exported to multiple formats while maintaining consistent branding and formatting.*

@@ -1,0 +1,111 @@
+baseURL: 'https://your-domain.com'
+languageCode: 'en-us'
+title: 'Documentation System'
+theme: 'stag-theme'
+
+# Site parameters
+params:
+  description: 'A modern documentation system with Hugo and Quarto'
+  author: 'Your Team'
+  version: '2.0.0'
+
+# Menu configuration
+menu:
+  main:
+    - name: 'Private'
+      url: '/private/'
+      weight: 10
+    - name: 'Shared'
+      url: '/shared/'
+      weight: 20
+    - name: 'Projects'
+      url: '/projects/'
+      weight: 30
+
+# Markup configuration
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: 'github'
+    lineNos: true
+    tabWidth: 4
+
+# Build configuration
+build:
+  writeStats: true
+
+# Security configuration
+security:
+  exec:
+    allow:
+      - '^(dart-)?sass(-embedded)?$'
+      - '^go$'
+      - '^npx$'
+      - '^postcss$'
+  funcs:
+    getenv:
+      - '^HUGO_'
+      - '^WC_'
+  http:
+    methods:
+      - 'GET'
+    urls:
+      - '.*'
+
+# Related content configuration
+related:
+  includeNewer: true
+  indices:
+    - name: 'keywords'
+      weight: 100
+    - name: 'tags'
+      weight: 80
+    - name: 'date'
+      weight: 10
+
+# Pagination
+pagination:
+  pagerSize: 10
+  path: 'page'
+
+# Taxonomies
+taxonomies:
+  tag: 'tags'
+  category: 'categories'
+  author: 'authors'
+
+# Output formats
+outputs:
+  home:
+    - 'HTML'
+    - 'RSS'
+    - 'JSON'
+  page:
+    - 'HTML'
+  section:
+    - 'HTML'
+    - 'RSS'
+
+# Sitemap configuration
+sitemap:
+  changefreq: 'weekly'
+  priority: 0.5
+  filename: 'sitemap.xml'
+
+# Permalinks
+permalinks:
+  posts: '/:year/:month/:title/'
+
+# Minification
+minify:
+  disableXML: true
+  minifyOutput: true
+
+# Services
+services:
+  disqus:
+    shortname: ''
+  googleAnalytics:
+    id: ''

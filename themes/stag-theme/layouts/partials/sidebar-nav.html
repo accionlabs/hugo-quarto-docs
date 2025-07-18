@@ -1,0 +1,115 @@
+{{ $currentSection := .Section }}
+{{ $currentPath := .RelPermalink }}
+
+<!-- Determine if we should show sidebar navigation -->
+{{ $showSidebar := false }}
+{{ $currentTopFolder := "" }}
+{{ $isRootLevel := false }}
+
+<!-- Parse the current path to determine the top-level folder -->
+{{ if .File }}
+    {{ $pathParts := split .File.Path "/" }}
+    {{ if gt (len $pathParts) 2 }}
+        {{ $currentTopFolder = index $pathParts 1 }}
+        {{ $showSidebar = true }}
+    {{ else if eq (len $pathParts) 2 }}
+        <!-- Handle root-level _index.md files like projects/_index.md -->
+        {{ $currentTopFolder = index $pathParts 0 }}
+        {{ $isRootLevel = true }}
+        {{ $showSidebar = true }}
+    {{ end }}
+{{ else }}
+    <!-- For section pages, check if we're in a subfolder via URL path -->
+    {{ $urlParts := split (strings.TrimSuffix "/" (strings.TrimPrefix "/" .RelPermalink)) "/" }}
+    {{ if gt (len $urlParts) 1 }}
+        {{ $currentTopFolder = index $urlParts 1 }}
+        {{ $showSidebar = true }}
+    {{ else if eq (len $urlParts) 1 }}
+        <!-- We're at root level of main sections (projects, private, shared) -->
+        {{ $currentTopFolder = index $urlParts 0 }}
+        {{ $isRootLevel = true }}
+        {{ $showSidebar = true }}
+    {{ end }}
+{{ end }}
+
+
+{{ if $showSidebar }}
+<div class="sidebar-nav">
+    <div class="nav-header">
+        {{ if not $isRootLevel }}
+            <!-- Back to parent level when in subfolder -->
+            <a href="/{{ $currentSection }}/" class="back-nav-icon" title="Back to {{ $currentSection | humanize | title }}">
+                {{ if eq $currentSection "projects" }}📁{{ else }}🏠{{ end }}
+            </a>
+        {{ else }}
+            <!-- Back to home when in root level -->
+            <a href="/" class="back-nav-icon" title="Back to Home">🏠</a>
+        {{ end }}
+        <h3>{{ $currentTopFolder | humanize | title }}</h3>
+    </div>
+    
+    <nav class="side-nav-tree">
+        {{ if $isRootLevel }}
+            <!-- For root level pages (projects, private, shared), only show subfolders -->
+            {{ $currentRootSection := .Site.GetPage (printf "/%s" $currentTopFolder) }}
+            {{ range $currentRootSection.Sections }}
+                <div class="nav-folder">
+                    <div class="nav-folder-header">
+                        <a href="{{ .Permalink }}" class="folder-name-link{{ if eq .RelPermalink $currentPath }} current{{ end }}">
+                            <span class="folder-icon">📁</span>
+                            <span class="folder-name">{{ .Title | humanize | title }}</span>
+                            <span class="item-count">({{ len .Pages }})</span>
+                        </a>
+                    </div>
+                </div>
+            {{ end }}
+        {{ else }}
+            <!-- For non-root pages, show the existing structure -->
+            {{ $currentProjectSection := .Site.GetPage (printf "/%s/%s" $currentSection $currentTopFolder) }}
+            
+            <!-- Display root level files in the current project -->
+            {{ range $currentProjectSection.RegularPages }}
+                <div class="nav-file">
+                    <a href="{{ .Permalink }}" class="nav-link{{ if eq .RelPermalink $currentPath }} current{{ end }}">
+                        <span class="file-icon">📄</span>
+                        <span class="file-name">{{ .Title }}</span>
+                        {{ if .Date }}
+                        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+                        {{ end }}
+                    </a>
+                </div>
+            {{ end }}
+            
+            <!-- Display subsections as folders -->
+            {{ range $currentProjectSection.Sections }}
+                <div class="nav-folder">
+                    <div class="nav-folder-header">
+                        <button class="folder-toggle" onclick="toggleFolder(this)" aria-label="Toggle folder">
+                            <span class="expand-icon">▼</span>
+                        </button>
+                        <a href="{{ .Permalink }}" class="folder-name-link{{ if eq .RelPermalink $currentPath }} current{{ end }}">
+                            <span class="folder-icon">📁</span>
+                            <span class="folder-name">{{ .Title | humanize | title }}</span>
+                            <span class="item-count">({{ len .Pages }})</span>
+                        </a>
+                    </div>
+                    
+                    <ul class="nav-subtree expanded">
+                        {{ range .Pages }}
+                        <li class="nav-file">
+                            <a href="{{ .Permalink }}" class="nav-link{{ if eq .RelPermalink $currentPath }} current{{ end }}">
+                                <span class="file-icon">📄</span>
+                                <span class="file-name">{{ .Title }}</span>
+                                {{ if .Date }}
+                                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+                                {{ end }}
+                            </a>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            {{ end }}
+        {{ end }}
+    </nav>
+</div>
+{{ end }}

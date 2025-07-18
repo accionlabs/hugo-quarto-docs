@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+    
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    
+    <!-- Quarto support -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+</head>
+<body>
+    <header>
+        {{ partial "header.html" . }}
+    </header>
+    
+    <nav>
+        {{ partial "navigation.html" . }}
+    </nav>
+    
+    <div class="main-container">
+        <!-- Side Navigation and Main Content -->
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                {{ partial "sidebar-nav.html" . }}
+            </aside>
+            
+            <main class="{{ if .IsHome }}home-main{{ else }}content-main{{ end }}">
+                {{ if not .IsHome }}
+                <!-- Breadcrumbs -->
+                {{ partial "breadcrumbs.html" . }}
+                {{ end }}
+                {{ block "main" . }}{{ end }}
+            </main>
+        </div>
+    </div>
+    
+    <footer>
+        {{ partial "footer.html" . }}
+    </footer>
+    
+    <script>
+        // Convert mermaid code blocks to mermaid divs (similar to Jekyll plugin)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mermaid first
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: "default",
+                securityLevel: "loose",
+                flowchart: { 
+                    useMaxWidth: true, 
+                    htmlLabels: true 
+                }
+            });
+            
+            // Convert code blocks to mermaid divs
+            const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+            console.log('Found', mermaidBlocks.length, 'mermaid blocks');
+            
+            mermaidBlocks.forEach(function(block, index) {
+                const pre = block.parentElement;
+                const div = document.createElement('div');
+                div.className = 'mermaid';
+                div.id = 'mermaid-' + index;
+                div.textContent = block.textContent;
+                pre.parentNode.replaceChild(div, pre);
+            });
+            
+            // Render all mermaid diagrams
+            mermaid.run();
+            console.log('Mermaid diagrams rendered');
+        });
+
+        // Folder toggle functionality
+        function toggleFolder(button) {
+            const folder = button.closest('.nav-folder');
+            const subtree = folder.querySelector('.nav-subtree');
+            
+            if (subtree) {
+                const isExpanded = subtree.classList.contains('expanded');
+                
+                if (isExpanded) {
+                    subtree.classList.remove('expanded');
+                    subtree.classList.add('collapsed');
+                    button.classList.add('collapsed');
+                } else {
+                    subtree.classList.remove('collapsed');
+                    subtree.classList.add('expanded');
+                    button.classList.remove('collapsed');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

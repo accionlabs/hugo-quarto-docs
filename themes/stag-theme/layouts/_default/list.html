@@ -1,0 +1,59 @@
+{{ define "main" }}
+<div class="section-content">
+    <header>
+        <h1>{{ .Title }}</h1>
+        {{ if .Params.description }}
+        <p class="description">{{ .Params.description }}</p>
+        {{ end }}
+    </header>
+    
+    <div class="content-body">
+        {{ .Content }}
+    </div>
+    
+    {{ if .Pages }}
+    <section class="page-list">
+        <h2>Contents</h2>
+        <ul class="nav-tree">
+            {{ range .Pages }}
+            <li class="nav-folder">
+                <div class="nav-folder-header">
+                    {{ if .Pages }}
+                    <button class="folder-toggle" onclick="toggleFolder(this)" aria-label="Toggle folder">
+                        <span class="expand-icon">▼</span>
+                    </button>
+                    {{ end }}
+                    <a href="{{ .Permalink }}" class="folder-name-link">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">{{ .Title }}</span>
+                        {{ if .Params.description }}
+                        <span class="item-count">({{ len .Pages }})</span>
+                        {{ end }}
+                    </a>
+                </div>
+                {{ if .Params.description }}
+                <div class="folder-description">{{ .Params.description }}</div>
+                {{ end }}
+                
+                {{ if .Pages }}
+                <ul class="nav-subtree expanded">
+                    {{ range .Pages }}
+                    <li class="nav-file" style="margin-left: 20px;">
+                        <a href="{{ .Permalink }}" class="nav-link">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">{{ .Title }}</span>
+                            {{ if .Date }}
+                            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+                            {{ end }}
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+            </li>
+            {{ end }}
+        </ul>
+    </section>
+    {{ end }}
+</div>
+{{ end }}

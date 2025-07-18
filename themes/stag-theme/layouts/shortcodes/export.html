@@ -1,0 +1,8 @@
+{{ $format := .Get "format" }}
+{{ $file := .Get "file" | default (printf "%s.%s" (path.BaseName $.Page.File.Path) $format) }}
+{{ $title := .Get "title" | default ($format | upper) }}
+
+<a href="{{ $file }}" class="export-link export-{{ $format }}" download>
+    <i class="icon-{{ $format }}"></i>
+    {{ $title }}
+</a>

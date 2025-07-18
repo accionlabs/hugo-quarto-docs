@@ -1,0 +1,10 @@
+name = "STAG Theme"
+description = "Custom theme for STAG documentation system"
+homepage = "https://github.com/accionlabs/stag-notes"
+tags = ["documentation", "notes", "quarto", "collaboration"]
+features = ["responsive", "comments", "exports", "mermaid"]
+min_version = "0.41.0"
+
+[author]
+  name = "STAG Team"
+  homepage = "https://github.com/accionlabs"

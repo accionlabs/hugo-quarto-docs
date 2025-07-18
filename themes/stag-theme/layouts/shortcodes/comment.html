@@ -1,0 +1,18 @@
+{{ $author := .Get "author" }}
+{{ $date := .Get "date" }}
+{{ $type := .Get "type" | default "note" }}
+{{ $title := .Get "title" }}
+
+<div class="stag-comment comment-{{ $type }}" data-author="{{ $author }}" data-date="{{ $date }}">
+    <div class="comment-header">
+        <span class="comment-author">@{{ $author }}</span>
+        <span class="comment-date">{{ $date }}</span>
+        <span class="comment-type comment-type-{{ $type }}">{{ $type }}</span>
+        {{ if $title }}
+        <span class="comment-title">{{ $title }}</span>
+        {{ end }}
+    </div>
+    <div class="comment-content">
+        {{ .Inner | markdownify }}
+    </div>
+</div>
