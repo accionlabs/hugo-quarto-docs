@@ -240,6 +240,21 @@
             <p><small>This will install Hugo, Quarto, and set up the documentation system locally</small></p>
         </div>
 
+        <div class="install-section" style="background: #e8f5e8; border: 2px solid #4caf50;">
+            <h2>🔄 Already Have It Installed? Get Updates!</h2>
+            <p>Upgrade your existing installation to get the latest features:</p>
+            
+            <div class="install-command" onclick="copyToClipboard(this)" style="background: #2e7d32;">
+                curl -sSL https://accionlabs.github.io/hugo-quarto-docs/upgrade.sh | bash
+            </div>
+            
+            <button class="copy-btn" onclick="copyUpgradeCommand()" style="background: #4caf50;">
+                📋 Copy Upgrade Command
+            </button>
+            
+            <p><small>This will safely update your system while preserving all your content</small></p>
+        </div>
+
         <div class="features">
             <div class="feature">
                 <span class="feature-icon">⚡</span>
@@ -333,6 +348,13 @@
             });
         }
         
+        function copyUpgradeCommand() {
+            const command = "curl -sSL https://accionlabs.github.io/hugo-quarto-docs/upgrade.sh | bash";
+            navigator.clipboard.writeText(command).then(function() {
+                showUpgradeCopyFeedback();
+            });
+        }
+        
         function showCopyFeedback() {
             const btn = document.querySelector('.copy-btn');
             const originalText = btn.textContent;
@@ -342,6 +364,19 @@
             setTimeout(() => {
                 btn.textContent = originalText;
                 btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function showUpgradeCopyFeedback() {
+            const btns = document.querySelectorAll('.copy-btn');
+            const upgradeBtn = btns[1]; // Second button is the upgrade button
+            const originalText = upgradeBtn.textContent;
+            upgradeBtn.textContent = '✅ Copied!';
+            upgradeBtn.classList.add('copied');
+            
+            setTimeout(() => {
+                upgradeBtn.textContent = originalText;
+                upgradeBtn.classList.remove('copied');
             }, 2000);
         }
     </script>
