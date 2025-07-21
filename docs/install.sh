@@ -249,14 +249,21 @@ clone_repository() {
     
     if [ -d "$INSTALL_DIR" ]; then
         print_warning "Directory $INSTALL_DIR already exists"
-        read -p "Do you want to remove it and reinstall? (y/N): " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            rm -rf "$INSTALL_DIR"
-            print_info "Removed existing directory"
+        if [ ! -t 0 ]; then
+            # Non-interactive mode: backup existing directory
+            local backup_dir="${INSTALL_DIR}-backup-$(date +%Y%m%d-%H%M%S)"
+            mv "$INSTALL_DIR" "$backup_dir"
+            print_info "Existing directory backed up to $backup_dir"
         else
-            print_info "Installation cancelled"
-            exit 0
+            read -p "Do you want to remove it and reinstall? (y/N): " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                rm -rf "$INSTALL_DIR"
+                print_info "Removed existing directory"
+            else
+                print_info "Installation cancelled"
+                exit 0
+            fi
         fi
     fi
     
@@ -353,7 +360,7 @@ print_completion() {
 main() {
     print_header
     
-    # Check if user wants to proceed
+    # Check if user wants to proceed (auto-yes if non-interactive)
     echo "This installer will:"
     echo "  • Install Hugo (static site generator)"
     echo "  • Install Quarto (document processor)"
@@ -361,11 +368,17 @@ main() {
     echo "  • Download the documentation system to: $INSTALL_DIR"
     echo "  • Set up sample content to get you started"
     echo
-    read -p "Continue with installation? (Y/n): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Nn]$ ]]; then
-        print_info "Installation cancelled"
-        exit 0
+    
+    # Check if running non-interactively (piped from curl)
+    if [ ! -t 0 ]; then
+        print_info "Running in non-interactive mode, proceeding with installation..."
+    else
+        read -p "Continue with installation? (Y/n): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Nn]$ ]]; then
+            print_info "Installation cancelled"
+            exit 0
+        fi
     fi
     
     check_prerequisites
