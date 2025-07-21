@@ -1,0 +1,180 @@
+---
+title: "Sample Project Proposal"
+description: "Example of a complete project proposal with export capability"
+date: 2025-01-21
+client: "Acme Corporation"
+team: ["John Smith", "Sarah Johnson"]
+quarto_exports: ["docx", "pptx"]
+---
+
+# Website Redesign Project Proposal
+
+## Executive Summary
+
+This proposal outlines a comprehensive website redesign project for Acme Corporation, aimed at modernizing the user experience, improving conversion rates, and establishing a stronger digital presence.
+
+### Key Objectives
+- Increase user engagement by 40%
+- Improve conversion rates by 25%
+- Modernize brand presentation
+- Optimize for mobile and accessibility
+
+## Project Overview
+
+### Current Challenges
+
+{{< comment author="john" date="2025-01-21" type="note" >}}
+These challenges were identified through user research and analytics review
+{{< /comment >}}
+
+Our analysis has identified several key areas for improvement:
+
+1. **Outdated Design**: Current website design is 5+ years old
+2. **Poor Mobile Experience**: 60% mobile traffic, but low engagement
+3. **Complex Navigation**: Users struggle to find key information
+4. **Slow Performance**: Average load time of 4.2 seconds
+5. **Low Conversion**: Current conversion rate at 1.2%
+
+### Proposed Solution
+
+We recommend a complete website redesign focusing on:
+
+```mermaid
+graph TD
+    A[User Research] --> B[Information Architecture]
+    B --> C[Visual Design]
+    C --> D[Development]
+    D --> E[Testing & Launch]
+    
+    F[Content Strategy] --> B
+    G[Brand Guidelines] --> C
+    H[Technical Audit] --> D
+```
+
+## Project Timeline
+
+| Phase | Duration | Key Deliverables |
+|-------|----------|------------------|
+| **Discovery & Research** | 2 weeks | User interviews, competitive analysis, technical audit |
+| **Information Architecture** | 1 week | Sitemap, user flows, wireframes |
+| **Visual Design** | 2 weeks | Design system, mockups, prototypes |
+| **Development** | 3 weeks | Frontend development, CMS integration |
+| **Testing & Launch** | 1 week | QA testing, performance optimization, launch |
+
+**Total Duration**: 9 weeks  
+**Target Launch**: March 15, 2025
+
+## Team & Resources
+
+### Core Team Members
+
+**John Smith - Lead Designer**
+- 8+ years UX/UI design experience
+- Specialized in e-commerce and conversion optimization
+- Led 50+ successful website redesigns
+
+**Sarah Johnson - Frontend Developer**  
+- 6+ years frontend development
+- Expert in modern web technologies (React, Next.js)
+- Performance optimization specialist
+
+**Mike Brown - Content Strategist**
+- 5+ years content strategy experience
+- SEO and conversion copywriting expert
+- Brand voice development
+
+### Project Management
+- Weekly progress meetings
+- Slack channel for daily communication  
+- Shared project dashboard for transparency
+- Client review sessions at each milestone
+
+## Budget Breakdown
+
+| Category | Cost | Description |
+|----------|------|-------------|
+| **Design** | $15,000 | UX research, wireframes, visual design |
+| **Development** | $25,000 | Frontend development, CMS setup |
+| **Content** | $8,000 | Content strategy, copywriting, SEO |
+| **Testing & QA** | $5,000 | Cross-browser testing, performance optimization |
+| **Project Management** | $7,000 | Coordination, meetings, documentation |
+| **Contingency (10%)** | $6,000 | Buffer for unforeseen requirements |
+
+**Total Project Cost**: $66,000
+
+## Expected Outcomes
+
+### Measurable Results
+
+We expect to achieve the following improvements within 3 months post-launch:
+
+1. **User Engagement**
+   - 40% increase in average session duration
+   - 50% reduction in bounce rate
+   - 60% increase in page views per session
+
+2. **Conversion Optimization**
+   - 25% increase in conversion rate (from 1.2% to 1.5%)
+   - 30% increase in lead generation
+   - 20% improvement in customer acquisition cost
+
+3. **Performance Metrics**
+   - Page load time under 2 seconds
+   - Mobile PageSpeed score above 90
+   - Accessibility compliance (WCAG 2.1 AA)
+
+4. **Business Impact**
+   - $200K additional annual revenue from improved conversions
+   - 15% increase in qualified leads
+   - Enhanced brand perception and trust
+
+### Success Metrics Dashboard
+
+We'll provide monthly reports tracking:
+- Google Analytics performance data
+- Conversion funnel analysis  
+- User experience metrics
+- Technical performance scores
+
+## Risk Management
+
+| Risk | Probability | Impact | Mitigation Strategy |
+|------|-------------|--------|-------------------|
+| Scope creep | Medium | High | Clear project scope, change request process |
+| Technical challenges | Low | Medium | Technical audit completed upfront |
+| Content delays | Medium | Medium | Content calendar with buffer time |
+| Stakeholder alignment | Low | High | Regular check-ins, clear approval process |
+
+## Next Steps
+
+To proceed with this project, we recommend:
+
+1. **Contract Approval** (Week 1)
+   - Review and sign project agreement
+   - Finalize payment schedule
+   - Set up project communication channels
+
+2. **Project Kickoff** (Week 2)  
+   - Stakeholder interviews
+   - Access to current website and analytics
+   - Brand guidelines and asset collection
+
+3. **Research Phase** (Weeks 2-3)
+   - User interviews and surveys
+   - Competitive analysis
+   - Technical audit and requirements
+
+## Conclusion
+
+This website redesign project represents a significant opportunity to transform Acme Corporation's digital presence and drive meaningful business results. Our experienced team, proven methodology, and focus on measurable outcomes ensure project success.
+
+We're excited to partner with you on this initiative and look forward to creating a website that truly reflects your brand's excellence and drives your business forward.
+
+---
+
+**Questions?** Contact the project team:
+- John Smith: john@example.com
+- Sarah Johnson: sarah@example.com
+- Project Manager: pm@example.com
+
+*This proposal is valid for 30 days from the date of submission.*

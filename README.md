@@ -34,6 +34,21 @@ This will automatically:
 2. Start the system: `./launch.sh` or `hugo serve`
 3. Open your browser: `http://localhost:1313`
 
+## 🔄 Staying Updated
+
+**Get the latest features and improvements:**
+
+```bash
+./update.sh
+```
+
+- ✅ **Automatic notifications** when updates are available
+- ✅ **One-command update** preserves all your content
+- ✅ **Safe rollback** if anything goes wrong
+- ✅ **No technical knowledge required**
+
+Your content is always protected during updates!
+
 ## 🛠️ Manual Installation (Advanced Users)
 
 ### Prerequisites

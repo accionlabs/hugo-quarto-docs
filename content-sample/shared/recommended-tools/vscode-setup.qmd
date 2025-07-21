@@ -1,0 +1,280 @@
+---
+title: "VS Code Setup Guide"
+description: "Complete guide to setting up VS Code for your documentation system"
+date: 2025-01-21
+quarto_exports: ["docx"]
+---
+
+# Setting Up VS Code for Your Documentation System
+
+VS Code is perfect for technical users who want powerful editing features, Git integration, and extensive customization. This guide will optimize it for documentation work.
+
+## 📥 Installation
+
+### Step 1: Download VS Code
+1. Visit [code.visualstudio.com](https://code.visualstudio.com)
+2. Download for your operating system
+3. Install normally
+
+### Step 2: Open Your Documentation Folder
+1. **Open VS Code**
+2. **File → Open Folder** (or Ctrl/Cmd + K, Ctrl/Cmd + O)
+3. **Navigate to**: `~/hugo-quarto-docs` 
+4. **Click "Open"**
+
+🎉 **Done!** VS Code is now set up with your entire documentation system.
+
+## 🔌 Essential Extensions
+
+Install these extensions for the best documentation experience:
+
+### Must-Have Extensions
+
+**Markdown All in One**
+- Syntax highlighting and preview
+- Table of contents generation
+- Keyboard shortcuts for formatting
+
+**Markdown Preview Enhanced**  
+- Better preview with Mermaid diagrams
+- Export to HTML, PDF
+- Math equation support
+
+**markdownlint**
+- Catches formatting issues
+- Ensures consistent style
+- Helps avoid Hugo build errors
+
+**Quarto**
+- Syntax highlighting for .qmd files
+- Preview and rendering support
+- Export functionality
+
+### Installation Steps
+1. **Open Extensions panel** (Ctrl/Cmd + Shift + X)
+2. **Search for each extension** by name
+3. **Click "Install"** on each one
+4. **Reload VS Code** when prompted
+
+## ⚙️ Configuration
+
+### Workspace Settings
+
+Create `.vscode/settings.json` in your documentation folder:
+
+```json
+{
+  "markdown.preview.breaks": true,
+  "markdown.preview.linkify": true,
+  "files.associations": {
+    "*.qmd": "quarto"
+  },
+  "markdownlint.config": {
+    "MD013": false,
+    "MD033": false
+  },
+  "editor.wordWrap": "on",
+  "editor.quickSuggestions": {
+    "comments": "off",
+    "strings": "off",
+    "other": "off"
+  }
+}
+```
+
+### Useful Keyboard Shortcuts
+
+Add these to your keybindings (Ctrl/Cmd + Shift + P → "Preferences: Open Keyboard Shortcuts"):
+
+- **Ctrl/Cmd + Shift + V**: Open Markdown preview
+- **Ctrl/Cmd + K V**: Open preview to the side  
+- **Ctrl/Cmd + B**: Toggle bold
+- **Ctrl/Cmd + I**: Toggle italic
+
+## 📝 Writing Workflow
+
+### File Management
+- **Explorer panel** (left sidebar) shows your folder structure
+- **Right-click folders** to create new files
+- **Use integrated terminal** (Ctrl/Cmd + `) for Hugo commands
+
+### Writing Experience
+1. **Open your document** in the main editor
+2. **Open preview pane** (Ctrl/Cmd + K V) to see formatting
+3. **Write and see changes** in real-time
+4. **Auto-save enabled** by default
+
+### Live Preview Setup
+1. **Open integrated terminal**: Ctrl/Cmd + `
+2. **Run Hugo**: `hugo serve`
+3. **Keep terminal running** while you work
+4. **Browser auto-refreshes** when you save files
+
+## 🔧 Productivity Features
+
+### Multi-Cursor Editing
+- **Ctrl/Cmd + D**: Select next occurrence of current word
+- **Ctrl/Cmd + Alt + Down**: Add cursor below
+- **Alt + Click**: Add cursor at position
+
+### Advanced Find & Replace  
+- **Ctrl/Cmd + F**: Find in current file
+- **Ctrl/Cmd + Shift + F**: Find across all files
+- **Ctrl/Cmd + H**: Find and replace
+- **Use regex** for complex replacements
+
+### Snippets for Faster Writing
+
+Create custom snippets (Ctrl/Cmd + Shift + P → "Configure User Snippets" → "markdown"):
+
+```json
+{
+  "frontmatter": {
+    "prefix": "front",
+    "body": [
+      "---",
+      "title: \"$1\"",
+      "description: \"$2\"", 
+      "date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "---",
+      "",
+      "# $1",
+      "",
+      "$0"
+    ],
+    "description": "Add frontmatter to markdown file"
+  },
+  "quarto-export": {
+    "prefix": "qfront",
+    "body": [
+      "---",
+      "title: \"$1\"",
+      "description: \"$2\"",
+      "date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE", 
+      "quarto_exports: [\"$3\"]",
+      "---",
+      "",
+      "# $1",
+      "",
+      "$0"
+    ],
+    "description": "Add frontmatter with Quarto exports"
+  }
+}
+```
+
+## 🔄 Git Integration
+
+### Built-in Version Control
+- **Source Control panel** (Ctrl/Cmd + Shift + G)
+- **See file changes** at a glance
+- **Commit directly** from VS Code
+- **View file history** and differences
+
+### Basic Git Workflow
+1. **Make changes** to your documents
+2. **Open Source Control** panel
+3. **Review changes** (click files to see diffs)
+4. **Stage changes** (+ icon)
+5. **Write commit message** and commit
+6. **Push to remote** if needed
+
+### Useful Git Features
+- **Gutter indicators** show added/modified lines
+- **Blame annotations** show who changed what
+- **Branch switching** from status bar
+- **Merge conflict resolution** with visual tools
+
+## 🎨 Customization
+
+### Themes for Documentation Work
+- **Light themes**: Default Light+, GitHub Light
+- **Dark themes**: Dark+ (default), One Dark Pro
+- **High contrast**: For better readability
+
+### Layout Optimization
+- **Hide Activity Bar** (View → Appearance) for more space
+- **Zen Mode** (Ctrl/Cmd + K Z) for distraction-free writing
+- **Split editor** (Ctrl/Cmd + \\) to view multiple files
+
+## ⚡ Advanced Tips
+
+### Workspace-Specific Settings
+- Keep settings in `.vscode/settings.json` 
+- Share configuration with team
+- Different settings per project
+
+### Task Automation
+Create `.vscode/tasks.json` for common commands:
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Hugo Server",
+      "type": "shell", 
+      "command": "hugo serve",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Build Site",
+      "type": "shell",
+      "command": "./build.sh", 
+      "group": "build"
+    }
+  ]
+}
+```
+
+### Multiple Projects
+- **File → Add Folder to Workspace** to work on multiple projects
+- **Save as workspace** for quick access
+- **Switch between projects** easily
+
+## 📱 Remote Development
+
+### GitHub Codespaces
+- Edit your documentation from any browser
+- Full VS Code experience in the cloud
+- Perfect for quick edits on any device
+
+### Remote SSH
+- Edit files on remote servers
+- Useful for team collaboration
+- Keep consistent development environment
+
+## ✅ Setup Checklist
+
+- [ ] VS Code installed and documentation folder opened
+- [ ] Essential extensions installed
+- [ ] Workspace settings configured
+- [ ] Markdown preview working
+- [ ] Hugo server running in integrated terminal
+- [ ] Git integration set up
+- [ ] Custom snippets created
+
+## 🆘 Troubleshooting
+
+**Extensions not working?** Restart VS Code after installing extensions.
+
+**Preview not showing?** Make sure "Markdown All in One" extension is enabled.
+
+**Git not showing?** Make sure you opened the root folder (`hugo-quarto-docs`), not just the `content` folder.
+
+**Hugo commands not working?** Use the integrated terminal (Ctrl/Cmd + `) and make sure you're in the right directory.
+
+## 🚀 Next Steps
+
+VS Code is incredibly powerful and customizable. Start with these basics and gradually explore advanced features as you get comfortable.
+
+Ready to start writing? Go back to the **[Step-by-Step Tutorial](../project-creation-tutorial/)** and create your first project!
+
+---
+
+💡 **Pro Tip**: VS Code has excellent documentation at [code.visualstudio.com/docs](https://code.visualstudio.com/docs). The "Tips and Tricks" page is especially helpful for improving productivity.

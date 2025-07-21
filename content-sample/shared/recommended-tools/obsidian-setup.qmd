@@ -1,0 +1,179 @@
+---
+title: "Obsidian Setup Guide"
+description: "Complete guide to setting up Obsidian for your documentation system"
+date: 2025-01-21
+quarto_exports: ["docx"]
+---
+
+# Setting Up Obsidian for Your Documentation System
+
+Obsidian is perfect for non-technical users who want a beautiful, intuitive writing experience. This guide will get you set up in minutes.
+
+## 📥 Installation
+
+### Step 1: Download Obsidian
+1. Visit [obsidian.md](https://obsidian.md)
+2. Click "Download for [Your OS]"
+3. Install like any other application
+
+### Step 2: Create Your Vault
+1. **Open Obsidian**
+2. Click **"Open folder as vault"**
+3. **Navigate to your documentation folder**:
+   - On Mac: `/Users/[username]/hugo-quarto-docs/content`
+   - On Windows: `C:\Users\[username]\hugo-quarto-docs\content`
+4. **Select the `content` folder** and click "Open"
+
+🎉 **Done!** Obsidian is now connected to your documentation system.
+
+## 🎨 Essential Setup
+
+### Configure File & Links Settings
+
+1. **Open Settings** (gear icon in bottom-left)
+2. **Go to "Files & Links"**
+3. **Configure these settings**:
+
+```
+✅ Automatically update internal links: ON
+✅ New link format: Relative path to file  
+✅ Use [[Wikilinks]]: OFF (use standard markdown links)
+✅ Default location for new notes: Same folder as current file
+✅ New file location: Current folder
+```
+
+### Set Up Templates (Optional but Recommended)
+
+1. **In Settings**, go to **"Core plugins"**
+2. **Enable "Templates"**
+3. **Create a templates folder**: `content/_templates`
+4. **In Templates settings**, set folder to `_templates`
+
+## 📝 Writing Your First Document
+
+### Creating New Files
+
+1. **Right-click in file explorer** (left panel)
+2. **Choose "New file"**
+3. **Name your file** (e.g., `project-proposal.md`)
+4. **Start writing!**
+
+### Basic Markdown Formatting
+
+Obsidian makes Markdown easy with live preview:
+
+```markdown
+# Heading 1
+## Heading 2
+
+**Bold text**
+*Italic text*
+
+- Bullet point
+- Another point
+
+1. Numbered list
+2. Another item
+
+[Link to another document](../other-file.md)
+```
+
+## 🚀 Workflow Tips
+
+### Recommended Folder View
+- **Enable file explorer** (left sidebar)
+- **Expand folders** to see your project structure
+- **Use the graph view** to visualize connections
+
+### Writing Workflow
+1. **Open your project folder** in the file explorer
+2. **Create or open** the document you want to edit
+3. **Write in the main panel** - live preview shows formatting
+4. **Save automatically** - Obsidian saves as you type
+5. **Preview in browser** - refresh your Hugo site to see changes
+
+### Linking Documents
+- Type `[[` to see suggestions for other files
+- Or use standard markdown: `[Link text](../path/to/file.md)`
+- Obsidian will show all links in the graph view
+
+## 🔧 Useful Plugins
+
+### Core Plugins (Built-in)
+- **File explorer** - Navigate your content
+- **Search** - Find text across all files  
+- **Graph view** - Visualize connections
+- **Outline** - See document structure
+- **Word count** - Track document length
+
+### Community Plugins (Optional)
+- **Advanced Tables** - Better table editing
+- **Calendar** - Date-based note creation
+- **Templater** - Advanced template system
+
+## 📱 Mobile Access
+
+**Obsidian Sync** (paid) or **iCloud/Dropbox sync**:
+- Edit documents on your phone/tablet
+- Changes sync back to your documentation system
+- Perfect for quick updates on the go
+
+## ⚡ Power User Tips
+
+### Quick Navigation
+- **Ctrl/Cmd + P**: Command palette (quick actions)
+- **Ctrl/Cmd + O**: Quick open file
+- **Ctrl/Cmd + Shift + F**: Global search
+
+### Efficient Writing
+- **Focus mode**: Hide sidebars for distraction-free writing
+- **Zen mode**: Full-screen writing
+- **Multiple panes**: Open related documents side-by-side
+
+### Project Management
+- Use **tags** like `#draft` or `#review` to track status
+- Create **MOCs (Maps of Content)** to organize large projects
+- Use **daily notes** for meeting notes and quick captures
+
+## 🔄 Integration with Hugo
+
+### File Organization
+- Obsidian shows the same folder structure as Hugo
+- Create files and folders directly in Obsidian
+- They automatically appear in your Hugo site
+
+### Preview Workflow
+1. **Write in Obsidian** - Beautiful, distraction-free interface
+2. **Save changes** - Automatic as you type  
+3. **Check Hugo preview** - Refresh browser to see live site
+4. **Iterate** - Make changes and preview until perfect
+
+### Export Features
+- Documents with `quarto_exports: ["docx", "pptx"]` in frontmatter
+- Will be processed by the build system
+- Access exports through the Hugo site interface
+
+## ✅ Setup Checklist
+
+- [ ] Obsidian installed and vault created
+- [ ] File & Links settings configured  
+- [ ] Can see your content folder structure
+- [ ] Created a test document
+- [ ] Can preview changes in Hugo site
+- [ ] Understand basic Markdown formatting
+
+## 🆘 Troubleshooting
+
+**Can't see files?** Make sure you opened the `content` folder as your vault, not the root documentation folder.
+
+**Links not working?** Check that "Use [[Wikilinks]]" is OFF in settings - Hugo uses standard Markdown links.
+
+**Changes not showing in Hugo?** Make sure Hugo is running (`hugo serve`) and refresh your browser.
+
+## 🚀 Next Steps
+
+Ready to start writing? Go back to the **[Step-by-Step Tutorial](../project-creation-tutorial/)** and create your first project!
+
+---
+
+💡 **Pro Tip**: Obsidian is incredibly powerful. Start simple with basic writing and explore advanced features as you get comfortable. The key is to focus on your content first, not the tools.
