@@ -1,0 +1,41 @@
+# Content Configuration for Hugo + Quarto Documentation System
+# This file defines where to source content from
+
+content_sources:
+  # Local content directory (default)
+  local:
+    enabled: true
+    path: "./content"
+    
+  # Remote content repositories
+  remote:
+    enabled: false
+    repositories:
+      - name: "team-docs"
+        url: "https://github.com/your-org/team-documentation.git"
+        branch: "main"
+        path: "content/"
+        destination: "content/"
+      
+      - name: "project-docs"
+        url: "https://github.com/your-org/project-docs.git"
+        branch: "main"
+        path: "docs/"
+        destination: "content/projects/"
+    
+    # Authentication for private repositories
+    auth:
+      method: "token" # token, ssh, or none
+      token_env: "GITHUB_TOKEN" # environment variable name
+      
+  # Content validation
+  validation:
+    required_sections: ["private", "projects", "shared"]
+    check_index_files: true
+    validate_frontmatter: true
+
+# Build settings
+build:
+  clean_before_sync: true
+  preserve_local_changes: false
+  sync_timeout: 300 # seconds

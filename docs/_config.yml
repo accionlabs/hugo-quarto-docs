@@ -1,0 +1,17 @@
+# GitHub Pages configuration for Hugo + Quarto Documentation System
+# This serves the installation page and install script
+
+title: "Hugo + Quarto Documentation System"
+description: "A modern documentation platform with Hugo and Quarto"
+url: "https://accionlabs.github.io"
+baseurl: "/hugo-quarto-docs"
+
+# GitHub Pages settings
+source: docs
+plugins:
+  - jekyll-github-metadata
+
+# Exclude files
+exclude:
+  - README.md
+  - install.sh

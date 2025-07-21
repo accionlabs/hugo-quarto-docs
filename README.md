@@ -11,9 +11,30 @@ A modern documentation system that combines Hugo's fast static site generation w
 - 🖨️ **Print-Friendly**: Clean printing with content-only view
 - 📊 **Diagram Support**: Mermaid diagrams and mathematical expressions
 - 💬 **Collaboration**: Inline comments and version control
-- 📱 **Mobile Ready**: Responsive design for all devices
+- 📱 **Mobile Ready**: Full-screen mobile navigation for easy access
 
-## 🚀 Quick Start
+## 🚀 One-Command Installation
+
+**For non-technical users - just copy and paste this command:**
+
+```bash
+curl -sSL https://accionlabs.github.io/hugo-quarto-docs/install.sh | bash
+```
+
+This will automatically:
+- ✅ Install Hugo (static site generator)
+- ✅ Install Quarto (document processor)  
+- ✅ Install Pandoc (for better table conversion)
+- ✅ Download and set up the documentation system
+- ✅ Create sample content to get you started
+- ✅ Create launch shortcuts
+
+**After installation:**
+1. Navigate to the directory: `cd ~/hugo-quarto-docs`
+2. Start the system: `./launch.sh` or `hugo serve`
+3. Open your browser: `http://localhost:1313`
+
+## 🛠️ Manual Installation (Advanced Users)
 
 ### Prerequisites
 
@@ -21,11 +42,11 @@ A modern documentation system that combines Hugo's fast static site generation w
 - [Quarto](https://quarto.org/docs/get-started/) (v1.3.0+)
 - [Pandoc](https://pandoc.org/installing.html) (optional but recommended for better table conversion)
 
-### Installation
+### Manual Setup
 
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/your-username/hugo-quarto-docs.git
+git clone https://github.com/accionlabs/hugo-quarto-docs.git
 cd hugo-quarto-docs
 ```
 
