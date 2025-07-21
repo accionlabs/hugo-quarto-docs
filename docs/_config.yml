@@ -7,11 +7,13 @@ url: "https://accionlabs.github.io"
 baseurl: "/hugo-quarto-docs"
 
 # GitHub Pages settings
-source: docs
 plugins:
   - jekyll-github-metadata
 
-# Exclude files
+# Include shell scripts
+include:
+  - install.sh
+
+# Exclude other files
 exclude:
   - README.md
-  - install.sh
