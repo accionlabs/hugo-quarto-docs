@@ -9,6 +9,11 @@ This is a powerful documentation system that combines Hugo's static site generat
 
 ## Getting Started
 
+### For Non-Technical Users
+**📝 [Start with Obsidian →](./shared/getting-started-with-obsidian/)**  
+Learn how to create amazing documentation using Obsidian - no coding required! This guide covers everything from setup to advanced features.
+
+### For Technical Users  
 1. **Replace this sample content** with your own documentation
 2. **Organize your content** in the three main sections:
    - **Private**: Personal notes and confidential information
@@ -33,11 +38,31 @@ content/
 └── shared/      # Team knowledge and shared methodologies
 ```
 
+## Sample Content Available
+
+This system includes comprehensive examples to get you started:
+
+### 🏢 [Website Redesign Project Demo →](./projects/website-redesign-demo/)
+Complete example of a real-world project with:
+- Project proposal (exports to DOCX/PPTX)
+- Meeting notes and progress reports
+- Technical specifications and design brief
+- Final presentation (exports to PPTX)
+
+### 📚 [Recommended Tools →](./shared/recommended-tools/)
+- **Obsidian setup guide** for non-technical users
+- **VS Code configuration** for technical users
+- Tool comparisons and recommendations
+
+### 🔄 [System Updates Guide →](./shared/system-updates/)
+Learn how to keep your documentation system updated with the latest features and improvements.
+
 ## Next Steps
 
-1. Delete or move this `content-sample/` folder
-2. Create your own `content/` folder structure
-3. Start adding your documentation
-4. Run `hugo serve` to see your site locally
+1. **Explore the sample content** to understand the possibilities
+2. **Choose your editing tool**: Obsidian (easy) or VS Code (advanced)
+3. **Copy useful templates** from the examples
+4. **Start creating** your own documentation
+5. **Run `./dev.sh`** to see your site locally
 
 Happy documenting! 📚

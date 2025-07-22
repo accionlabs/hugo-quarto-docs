@@ -9,6 +9,61 @@
     
     <div class="content-body">
         {{ .Content }}
+        
+        <!-- Show sample content guidance only if sample content exists -->
+        {{ if and (eq .Section "") (eq .Kind "home") }}
+            {{ $obsidianGuide := .Site.GetPage "/shared/getting-started-with-obsidian" }}
+            {{ $websiteProject := .Site.GetPage "/projects/website-redesign-demo" }}
+            {{ if or $obsidianGuide $websiteProject }}
+            <div class="sample-content-guide" style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 8px; padding: 24px; margin: 32px 0;">
+                <h2 style="color: #2563eb; margin-top: 0;">📚 Explore Sample Content First</h2>
+                <p>This system includes comprehensive examples to help you get started. <strong>Explore these before creating your own content:</strong></p>
+                
+                <div style="display: grid; gap: 16px; margin: 24px 0;">
+                    {{ if $websiteProject }}
+                    <div style="border: 1px solid #d1d5db; border-radius: 6px; padding: 16px; background: white;">
+                        <h3 style="margin: 0 0 8px 0; color: #1f2937;">🏢 <a href="{{ $websiteProject.Permalink }}" style="text-decoration: none; color: #2563eb;">Complete Project Example</a></h3>
+                        <p style="margin: 0; color: #6b7280;">Real-world project with proposals, meeting notes, technical specs, and presentations that export to DOCX/PPTX</p>
+                    </div>
+                    {{ end }}
+                    
+                    {{ if $obsidianGuide }}
+                    <div style="border: 1px solid #d1d5db; border-radius: 6px; padding: 16px; background: white;">
+                        <h3 style="margin: 0 0 8px 0; color: #1f2937;">📝 <a href="{{ $obsidianGuide.Permalink }}" style="text-decoration: none; color: #2563eb;">Obsidian Setup Guide</a></h3>
+                        <p style="margin: 0; color: #6b7280;">Complete tutorial for non-technical users - create amazing documentation without coding</p>
+                    </div>
+                    {{ end }}
+                    
+                    {{ $updatesGuide := .Site.GetPage "/shared/system-updates" }}
+                    {{ if $updatesGuide }}
+                    <div style="border: 1px solid #d1d5db; border-radius: 6px; padding: 16px; background: white;">
+                        <h3 style="margin: 0 0 8px 0; color: #1f2937;">🔄 <a href="{{ $updatesGuide.Permalink }}" style="text-decoration: none; color: #2563eb;">Keep System Updated</a></h3>
+                        <p style="margin: 0; color: #6b7280;">Learn how to get the latest features and improvements safely</p>
+                    </div>
+                    {{ end }}
+                    
+                    {{ $toolsGuide := .Site.GetPage "/shared/recommended-tools" }}
+                    {{ if $toolsGuide }}
+                    <div style="border: 1px solid #d1d5db; border-radius: 6px; padding: 16px; background: white;">
+                        <h3 style="margin: 0 0 8px 0; color: #1f2937;">🛠️ <a href="{{ $toolsGuide.Permalink }}" style="text-decoration: none; color: #2563eb;">Tool Recommendations</a></h3>
+                        <p style="margin: 0; color: #6b7280;">Obsidian for beginners, VS Code for advanced users, plus setup guides</p>
+                    </div>
+                    {{ end }}
+                </div>
+                
+                <div style="background: #fef3c7; border: 1px solid #fbbf24; border-radius: 6px; padding: 16px; margin-top: 24px;">
+                    <p style="margin: 0;"><strong>💡 Getting Started Tips:</strong></p>
+                    <ol style="margin: 8px 0 0 0; padding-left: 20px;">
+                        <li><strong>Explore the examples above</strong> to understand what's possible</li>
+                        <li><strong>Follow the Obsidian guide</strong> if you're new to documentation</li>  
+                        <li><strong>Copy useful templates</strong> from the sample project</li>
+                        <li><strong>Start small</strong> - create one document to get familiar</li>
+                        <li><strong>Delete sample folders</strong> when you're ready to work with your own content</li>
+                    </ol>
+                </div>
+            </div>
+            {{ end }}
+        {{ end }}
     </div>
     
     {{ if .Pages }}
