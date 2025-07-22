@@ -32,6 +32,11 @@ markup:
     lineNos: true
     tabWidth: 4
 
+# Media types - tell Hugo that QMD files should be treated as markdown
+mediaTypes:
+  text/markdown:
+    suffixes: ["md", "markdown", "qmd"]
+
 # Build configuration
 build:
   writeStats: true
