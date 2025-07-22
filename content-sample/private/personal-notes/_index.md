@@ -49,10 +49,10 @@ private/
 ## Sample Contents
 
 This folder contains example private documentation:
-- **[Personal Design Methodology](./design-methodology.md)** - Individual approach to design work
-- **[Meeting Preparation Template](./meeting-prep-template.md)** - Reusable prep framework
-- **[Client Observation Notes](./client-insights.md)** - Confidential client insights
-- **[Learning Journal](./learning-journal.md)** - Personal development tracking
+- **[Personal Design Methodology](./design-methodology/)** - Individual approach to design work
+- **[Meeting Preparation Template](./meeting-prep-template/)** - Reusable prep framework
+- **[Client Observation Notes](./client-insights/)** - Confidential client insights
+- **[Learning Journal](./learning-journal/)** - Personal development tracking
 
 ## Privacy & Security
 

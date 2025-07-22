@@ -75,7 +75,7 @@ Obsidian makes Markdown easy with live preview:
 1. Numbered list
 2. Another item
 
-[Link to another document](../other-file.md)
+[Link to another document](../other-file/)
 ```
 
 ## 🚀 Workflow Tips
@@ -94,7 +94,7 @@ Obsidian makes Markdown easy with live preview:
 
 ### Linking Documents
 - Type `[[` to see suggestions for other files
-- Or use standard markdown: `[Link text](../path/to/file.md)`
+- Or use standard markdown: `[Link text](../path/to/file/)`
 - Obsidian will show all links in the graph view
 
 ## 🔧 Useful Plugins

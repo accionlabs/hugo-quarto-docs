@@ -38,17 +38,17 @@ A comprehensive website redesign project for Acme Corporation, focusing on moder
 ## Project Documents
 
 ### Planning & Research
-- [Project Proposal](./project-proposal.qmd) (exports to DOCX/PPTX)
-- [Meeting Notes](./meeting-notes.md) (internal documentation)
-- [Research Summary](./research-summary.md)
+- [Project Proposal](./project-proposal/) (exports to DOCX/PPTX)
+- [Meeting Notes](./meeting-notes/) (internal documentation)
+- [Research Summary](./research-summary/)
 
 ### Design & Development  
-- [Design Brief](./design-brief.qmd) (exports to DOCX)
-- [Technical Specifications](./technical-specs.md)
+- [Design Brief](./design-brief/) (exports to DOCX)
+- [Technical Specifications](./technical-specs/)
 
 ### Progress Reports
-- [Weekly Updates](./weekly-reports.md)
-- [Final Presentation](./final-presentation.qmd) (exports to PPTX)
+- [Weekly Updates](./weekly-reports/)
+- [Final Presentation](./final-presentation/) (exports to PPTX)
 
 ## Current Status: Week 3 - Design Phase
 

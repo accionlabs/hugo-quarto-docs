@@ -173,7 +173,7 @@ Ordered list:
 #### Links
 ```markdown
 [Link text](https://example.com)
-[Link to another document](./other-document.md)
+[Link to another document](./other-document/)
 ```
 
 ## Working with Projects
@@ -220,9 +220,9 @@ Brief description of what this project is about and why it matters.
 - **Name** - Role and responsibilities
 
 ## Project Documents
-- [Project Proposal](./project-proposal.qmd) (exports to DOCX/PPTX)
-- [Meeting Notes](./meeting-notes.md)
-- [Progress Reports](./progress-reports.md)
+- [Project Proposal](./project-proposal/) (exports to DOCX/PPTX)
+- [Meeting Notes](./meeting-notes/)
+- [Progress Reports](./progress-reports/)
 
 ## Current Status
 Brief update on where the project stands right now.
@@ -311,9 +311,9 @@ When and what will be discussed next.
 
 #### Internal Links
 ```markdown
-See our [project proposal](../projects/website-redesign/project-proposal.md) for more details.
+See our [project proposal](../projects/website-redesign/project-proposal/) for more details.
 
-Reference the [style guide](./style-guide.md) when writing.
+Reference the [style guide](./style-guide/) when writing.
 ```
 
 #### Creating Table of Contents
