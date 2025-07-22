@@ -198,7 +198,7 @@ apply_upgrade() {
         "archetypes/"
         "layouts/"
         "build.sh"
-        "dev.sh"
+        "launch.sh"
         "setup.sh" 
         "update.sh"
         "check-updates.sh"
@@ -229,7 +229,7 @@ apply_upgrade() {
     done
     
     # Make scripts executable
-    chmod +x build.sh dev.sh setup.sh update.sh check-updates.sh 2>/dev/null || true
+    chmod +x build.sh launch.sh setup.sh update.sh check-updates.sh 2>/dev/null || true
     
     # Update version info
     if [ -d "$TEMP_DIR/.git" ]; then
@@ -283,7 +283,7 @@ test_upgrade() {
     fi
     
     # Check that important files exist
-    local critical_files=("themes/stag-theme" "build.sh" "dev.sh")
+    local critical_files=("themes/stag-theme" "build.sh" "launch.sh")
     local all_good=true
     
     for file in "${critical_files[@]}"; do
@@ -320,7 +320,7 @@ show_completion() {
     
     print_info "🚀 Next steps:"
     echo "  1. Start your documentation system:"
-    echo "     ./dev.sh  (or  hugo serve)"
+    echo "     ./launch.sh  (or  hugo serve)"
     echo
     echo "  2. Visit your site:"
     echo "     http://localhost:1313"

@@ -278,7 +278,7 @@ setup_application() {
     cd "$INSTALL_DIR"
     
     # Make scripts executable
-    chmod +x build.sh setup.sh dev.sh
+    chmod +x build.sh setup.sh launch.sh
     
     # Copy sample content to get started
     if [ -d "content-sample" ] && [ ! -d "content" ]; then

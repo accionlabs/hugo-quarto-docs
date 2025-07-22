@@ -136,7 +136,7 @@ apply_updates() {
         "archetypes/"
         "layouts/"
         "build.sh"
-        "dev.sh" 
+        "launch.sh" 
         "setup.sh"
         "update.sh"
         "hugo.yaml"
@@ -159,7 +159,7 @@ apply_updates() {
     done
     
     # Make scripts executable
-    chmod +x build.sh dev.sh setup.sh update.sh 2>/dev/null || true
+    chmod +x build.sh launch.sh setup.sh update.sh 2>/dev/null || true
     
     print_success "Updates applied successfully!"
 }
@@ -218,7 +218,7 @@ show_completion() {
     
     echo
     print_info "Next steps:"
-    echo "  1. Start your documentation system: ./dev.sh"
+    echo "  1. Start your documentation system: ./launch.sh"
     echo "  2. Visit: http://localhost:1313"
     echo "  3. Check out new features and improvements"
     echo
