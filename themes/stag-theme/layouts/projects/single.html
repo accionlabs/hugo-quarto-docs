@@ -29,7 +29,8 @@
     <div class="export-links">
         <h3>Download Formats:</h3>
         {{ range .Params.quarto_exports }}
-        {{ $exportFile := printf "%s/%s.%s" (strings.TrimSuffix "/" (path.Dir $.RelPermalink)) (path.BaseName $.File.Path) . }}
+        {{ $relativeDir := strings.TrimPrefix "/content/" (path.Dir $.File.Path) }}
+        {{ $exportFile := printf "/%s/%s.%s" $relativeDir (path.BaseName $.File.Path) . }}
         <a href="{{ $exportFile }}" class="export-link export-{{ . }}" download>
             <i class="icon-{{ . }}"></i> {{ . | upper }}
         </a>
