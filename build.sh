@@ -301,7 +301,7 @@ process_quarto_files() {
                 # Revert mermaid syntax back to Hugo format after rendering
                 if grep -q '```{mermaid}' "$base_name.qmd"; then
                     sed -i.tmp 's/```{mermaid}/```mermaid/g' "$base_name.qmd"
-                    rm -f "${base_name.qmd}.tmp"
+                    rm -f "${base_name}.qmd.tmp"
                 fi
             else
                 log_success "  → All exports up to date, skipping render"
