@@ -63,6 +63,6 @@ Learn how to keep your documentation system updated with the latest features and
 2. **Choose your editing tool**: Obsidian (easy) or VS Code (advanced)
 3. **Copy useful templates** from the examples
 4. **Start creating** your own documentation
-5. **Run `./dev.sh`** to see your site locally
+5. **Run `./launch.sh`** to see your site locally
 
 Happy documenting! 📚

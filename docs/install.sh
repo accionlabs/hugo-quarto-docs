@@ -299,19 +299,7 @@ setup_application() {
 create_shortcuts() {
     print_step "Creating shortcuts..."
     
-    # Create a launch script
-    cat > "$INSTALL_DIR/launch.sh" << 'EOF'
-#!/bin/bash
-cd "$(dirname "$0")"
-echo "Starting Hugo + Quarto Documentation System..."
-echo "Opening browser at http://localhost:1313"
-echo "Press Ctrl+C to stop the server"
-echo ""
-
-# Start Hugo server
-hugo serve --bind 0.0.0.0 --baseURL http://localhost:1313
-EOF
-    
+    # Make sure launch.sh is executable
     chmod +x "$INSTALL_DIR/launch.sh"
     
     # Try to create desktop shortcut on macOS
@@ -323,7 +311,7 @@ EOF
         print_success "Desktop shortcut created: Hugo Docs.command"
     fi
     
-    print_success "Launch script created: $INSTALL_DIR/launch.sh"
+    print_success "Launch script ready: $INSTALL_DIR/launch.sh"
 }
 
 # Print completion message
