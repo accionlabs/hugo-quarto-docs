@@ -84,7 +84,7 @@ check_existing_installations() {
         echo "   2) Create new installation anyway"
         echo "   3) Exit"
         echo ""
-        read -p "Your choice (1, 2, or 3): " update_choice
+        read -p "Your choice (1, 2, or 3): " update_choice < /dev/tty
         
         case $update_choice in
             1)
@@ -105,7 +105,7 @@ check_existing_installations() {
                         echo "   $((i+1)). $relative_path"
                     done
                     echo ""
-                    read -p "Choose installation (1-${#existing_dirs[@]}): " install_choice
+                    read -p "Choose installation (1-${#existing_dirs[@]}): " install_choice < /dev/tty
                     
                     if [[ "$install_choice" =~ ^[0-9]+$ ]] && [ "$install_choice" -ge 1 ] && [ "$install_choice" -le ${#existing_dirs[@]} ]; then
                         local target_dir="${existing_dirs[$((install_choice-1))]}"
@@ -244,7 +244,7 @@ EOF
     
     echo ""
     echo "Would you like to start the updated system now?"
-    read -p "Start now? (y/n): " start_choice
+    read -p "Start now? (y/n): " start_choice < /dev/tty
     
     if [[ "$start_choice" =~ ^[Yy] ]]; then
         echo ""
@@ -266,7 +266,7 @@ echo ""
 echo "   Press Enter to install in Documents (recommended)"
 echo "   Or type a different location (like Desktop):"
 echo ""
-read -p "   Location: " custom_location
+read -p "   Location: " custom_location < /dev/tty
 
 if [ -z "$custom_location" ]; then
     INSTALL_DIR="$HOME/Documents/Documentation System"
@@ -378,7 +378,7 @@ pkill -f "launch.sh" 2>/dev/null || true
 echo "✅ Documentation System stopped"
 echo ""
 echo "💡 To start again, double-click '🚀 Start.command'"
-read -p "Press Enter to close..."
+read -p "Press Enter to close..." < /dev/tty
 EOF
 
 # Check for and create app-specific shortcuts
@@ -518,7 +518,7 @@ echo "1) Start the Documentation System now"
 echo "2) Open the installation folder"
 echo "3) Exit (start manually later)"
 echo ""
-read -p "Choose (1, 2, or 3): " choice
+read -p "Choose (1, 2, or 3): " choice < /dev/tty
 
 case $choice in
     1)
