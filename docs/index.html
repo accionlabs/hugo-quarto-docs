@@ -226,8 +226,8 @@
         </div>
 
         <div class="install-section">
-            <h2>🎯 One-Click Installation (EASIEST!)</h2>
-            <p>Copy this command, paste in Terminal, press Enter:</p>
+            <h2>🎯 One-Click Installation & Updates (EASIEST!)</h2>
+            <p>Copy this command, paste in Terminal, press Enter - works for new installations AND updates:</p>
             
             <div class="install-command" onclick="copyToClipboard(this)">
                 curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash
@@ -240,22 +240,33 @@
             <div class="requirements" style="background: #fff3cd; margin-top: 20px;">
                 <p><strong>📱 On Mac:</strong> Open Terminal (press Cmd+Space, type "Terminal", press Enter)</p>
                 <p><strong>✅ No downloads, no renaming files - just paste and run!</strong></p>
+                <p><strong>🧠 Smart Detection:</strong> Automatically finds and updates existing installations</p>
             </div>
         </div>
 
         <div class="install-section" style="background: #e8f5e8; border: 2px solid #4caf50;">
-            <h2>🔄 Already Have It Installed? Get Updates!</h2>
-            <p>Upgrade your existing installation to get the latest features:</p>
+            <h2>🔄 Already Have It Installed? Use the Same Command!</h2>
+            <p>Great news! The web installer now handles both new installations AND updates automatically:</p>
             
             <div class="install-command" onclick="copyToClipboard(this)" style="background: #2e7d32;">
-                curl -sSL https://accionlabs.github.io/hugo-quarto-docs/upgrade.sh | bash
+                curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash
             </div>
             
-            <button class="copy-btn" onclick="copyUpgradeCommand()" style="background: #4caf50;">
-                📋 Copy Upgrade Command
+            <button class="copy-btn" onclick="copyInstallCommand()" style="background: #4caf50;">
+                📋 Copy Command
             </button>
             
-            <p><small>This will safely update your system while preserving all your content</small></p>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                <p><strong>✨ Smart Installation:</strong></p>
+                <ul style="text-align: left; margin: 10px 0;">
+                    <li>🔍 <strong>Detects existing installations</strong> automatically</li>
+                    <li>🔄 <strong>Offers to update</strong> if system already exists</li>
+                    <li>💾 <strong>Creates backups</strong> before any changes</li>
+                    <li>📂 <strong>Preserves all your documents</strong> and settings</li>
+                    <li>🆕 <strong>Creates new installation</strong> if none exists</li>
+                </ul>
+                <p><small><strong>One command works for everything!</strong> No need to remember different commands.</small></p>
+            </div>
         </div>
 
         <div class="features">
@@ -290,8 +301,8 @@
             <div class="step">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h4>Run Installation Command</h4>
-                    <p>Copy and paste the installation command in your terminal. It will automatically install Hugo, Quarto, and download the documentation system.</p>
+                    <h4>Run the One-Click Command</h4>
+                    <p>Copy and paste the command in your terminal. It will automatically detect if you have an existing installation or need a new one, then handle everything appropriately.</p>
                 </div>
             </div>
             
@@ -352,7 +363,7 @@
         }
         
         function copyUpgradeCommand() {
-            const command = "curl -sSL https://accionlabs.github.io/hugo-quarto-docs/upgrade.sh | bash";
+            const command = "curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash";
             navigator.clipboard.writeText(command).then(function() {
                 showUpgradeCopyFeedback();
             });

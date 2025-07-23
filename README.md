@@ -15,7 +15,7 @@ A modern documentation system that combines Hugo's fast static site generation w
 
 ## 🚀 Installation Options
 
-### 🎯 One-Click Installation (EASIEST!)
+### 🎯 One-Click Installation & Updates (EASIEST!)
 
 **Copy this line, paste in Terminal, press Enter:**
 
@@ -23,12 +23,14 @@ A modern documentation system that combines Hugo's fast static site generation w
 curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash
 ```
 
-**That's it!** The installer will:
-- ✅ Set up everything automatically (no downloads, no renaming)
-- ✅ Create desktop shortcuts you can double-click
-- ✅ Put documents in Documents/Documentation System (easy to find)
-- ✅ Guide you through the entire process step-by-step
-- ✅ Work without any technical knowledge
+**That's it!** The smart installer will:
+- ✅ **Detect existing installations** and offer to update them
+- ✅ **Create new installations** when none exist
+- ✅ **Set up everything automatically** (no downloads, no renaming)
+- ✅ **Create desktop shortcuts** you can double-click
+- ✅ **Put documents in Documents/Documentation System** (easy to find)
+- ✅ **Guide you through the entire process** step-by-step
+- ✅ **Work without any technical knowledge**
 
 ### 🖱️ Alternative: Download Method
 
@@ -71,13 +73,18 @@ content/
 
 **Get the latest features and improvements:**
 
+For existing installations, simply run the same web installer command:
+
 ```bash
-./update.sh
+curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash
 ```
 
-- ✅ **Automatic notifications** when updates are available
-- ✅ **One-command update** preserves all your content
-- ✅ **Safe rollback** if anything goes wrong
+**✨ Smart Update System:**
+- ✅ **Automatically detects** existing installations
+- ✅ **Offers update option** with easy selection
+- ✅ **Creates automatic backups** before any changes
+- ✅ **Preserves all your content** and settings
+- ✅ **Safe rollback** capability built-in
 - ✅ **No technical knowledge required**
 
 Your content is always protected during updates!
