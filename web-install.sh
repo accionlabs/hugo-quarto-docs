@@ -37,6 +37,226 @@ show_error() {
     echo -e "${RED}❌ ${message}${NC}"
 }
 
+# Check for existing installations first
+check_existing_installations() {
+    local existing_dirs=()
+    
+    # Common installation locations
+    local common_locations=(
+        "$HOME/Documents/Documentation System"
+        "$HOME/Desktop/Documentation System"
+        "$HOME/Documentation System"
+    )
+    
+    # Check common locations
+    for dir in "${common_locations[@]}"; do
+        if [ -d "$dir" ] && [ -f "$dir/launch.sh" ]; then
+            existing_dirs+=("$dir")
+        fi
+    done
+    
+    # If existing installations found, offer update instead
+    if [ ${#existing_dirs[@]} -gt 0 ]; then
+        echo ""
+        echo "╔════════════════════════════════════════════════════════════════╗"
+        echo "║              🔍 Existing Installation Detected!               ║"
+        echo "╚════════════════════════════════════════════════════════════════╝"
+        echo ""
+        echo -e "${YELLOW}We found existing Documentation System installations:${NC}"
+        echo ""
+        
+        for i in "${!existing_dirs[@]}"; do
+            local dir="${existing_dirs[$i]}"
+            local relative_path="${dir#$HOME/}"
+            echo "   $((i+1)). $relative_path"
+        done
+        
+        echo ""
+        echo -e "${BLUE}For existing installations, you should use the UPDATE system instead:${NC}"
+        echo ""
+        echo "   ✅ Updates preserve all your documents and settings"
+        echo "   ✅ Creates automatic backups before updating"
+        echo "   ✅ Includes rollback capability if needed"
+        echo "   ✅ Only updates system files, keeps your content safe"
+        echo ""
+        echo "Choose an option:"
+        echo "   1) Update existing installation (recommended)"
+        echo "   2) Create new installation anyway"
+        echo "   3) Exit"
+        echo ""
+        read -p "Your choice (1, 2, or 3): " update_choice
+        
+        case $update_choice in
+            1)
+                if [ ${#existing_dirs[@]} -eq 1 ]; then
+                    # Single installation - update it directly
+                    local target_dir="${existing_dirs[0]}"
+                    echo ""
+                    show_progress "Updating existing installation at: ${target_dir#$HOME/}"
+                    update_existing_installation "$target_dir"
+                    exit 0
+                else
+                    # Multiple installations - let user choose
+                    echo ""
+                    echo "Which installation would you like to update?"
+                    for i in "${!existing_dirs[@]}"; do
+                        local dir="${existing_dirs[$i]}"
+                        local relative_path="${dir#$HOME/}"
+                        echo "   $((i+1)). $relative_path"
+                    done
+                    echo ""
+                    read -p "Choose installation (1-${#existing_dirs[@]}): " install_choice
+                    
+                    if [[ "$install_choice" =~ ^[0-9]+$ ]] && [ "$install_choice" -ge 1 ] && [ "$install_choice" -le ${#existing_dirs[@]} ]; then
+                        local target_dir="${existing_dirs[$((install_choice-1))]}"
+                        echo ""
+                        show_progress "Updating existing installation at: ${target_dir#$HOME/}"
+                        update_existing_installation "$target_dir"
+                        exit 0
+                    else
+                        show_error "Invalid choice. Exiting."
+                        exit 1
+                    fi
+                fi
+                ;;
+            2)
+                echo ""
+                show_progress "Proceeding with new installation..."
+                ;;
+            3)
+                echo ""
+                echo "✅ No changes made. Your existing installations are safe."
+                exit 0
+                ;;
+            *)
+                show_error "Invalid choice. Exiting."
+                exit 1
+                ;;
+        esac
+    fi
+}
+
+# Function to update existing installation
+update_existing_installation() {
+    local target_dir="$1"
+    
+    echo ""
+    show_progress "Downloading remote update script..."
+    
+    # Create temporary update script
+    local temp_update_script="/tmp/remote_update_$$.sh"
+    
+    # Download or create the update script
+    cat > "$temp_update_script" << 'EOF'
+#!/bin/bash
+# Remote Update Script for Documentation System
+
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+TARGET_DIR="$1"
+
+show_progress() {
+    echo -e "${BLUE}📋 $1${NC}"
+}
+
+show_success() {
+    echo -e "${GREEN}✅ $1${NC}"
+}
+
+show_error() {
+    echo -e "${RED}❌ $1${NC}"
+}
+
+# Change to target directory
+cd "$TARGET_DIR" || {
+    show_error "Could not access installation directory"
+    exit 1
+}
+
+show_progress "Backing up current installation..."
+backup_dir="backup_$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$backup_dir"
+
+# Backup system files (not user content)
+cp -r themes static build.sh launch.sh *.yml "$backup_dir/" 2>/dev/null || true
+show_success "Backup created: $backup_dir"
+
+show_progress "Downloading latest system files..."
+curl -sSL https://github.com/accionlabs/hugo-quarto-docs/archive/main.zip -o temp_update.zip || {
+    show_error "Failed to download update"
+    exit 1
+}
+
+show_progress "Extracting updates..."
+unzip -q temp_update.zip
+if [ -d "hugo-quarto-docs-main" ]; then
+    # Update system files only (preserve user content)
+    cp -r hugo-quarto-docs-main/themes . 2>/dev/null || true
+    cp -r hugo-quarto-docs-main/static . 2>/dev/null || true
+    cp hugo-quarto-docs-main/build.sh . 2>/dev/null || true
+    cp hugo-quarto-docs-main/launch.sh . 2>/dev/null || true
+    cp hugo-quarto-docs-main/*.yml . 2>/dev/null || true
+    cp hugo-quarto-docs-main/update.sh . 2>/dev/null || true
+    cp hugo-quarto-docs-main/check-updates.sh . 2>/dev/null || true
+    
+    # Make scripts executable
+    chmod +x *.sh 2>/dev/null || true
+    
+    # Clean up
+    rm -rf hugo-quarto-docs-main temp_update.zip
+    
+    show_success "System files updated successfully!"
+    echo ""
+    echo "╔════════════════════════════════════════════════════════════════╗"
+    echo "║                    🎉 Update Complete!                        ║"
+    echo "╚════════════════════════════════════════════════════════════════╝"
+    echo ""
+    echo -e "${GREEN}Your Documentation System has been updated with the latest features:${NC}"
+    echo ""
+    echo "   ✅ Navigation shows filenames when titles are missing"
+    echo "   ✅ Front matter hidden in print view"
+    echo "   ✅ Support for .md files with quarto_exports"
+    echo "   ✅ Both array and Obsidian format supported"
+    echo ""
+    echo -e "${BLUE}📂 Your content and documents are preserved safely${NC}"
+    echo -e "${BLUE}💾 Backup available in: $backup_dir${NC}"
+    echo ""
+    echo -e "${YELLOW}🚀 Ready to use:${NC}"
+    echo "   Double-click '🚀 Start.command' to start with new features"
+    echo ""
+else
+    show_error "Failed to extract update files"
+    exit 1
+fi
+EOF
+    
+    chmod +x "$temp_update_script"
+    
+    # Run the update
+    "$temp_update_script" "$target_dir"
+    
+    # Clean up
+    rm -f "$temp_update_script"
+    
+    echo ""
+    echo "Would you like to start the updated system now?"
+    read -p "Start now? (y/n): " start_choice
+    
+    if [[ "$start_choice" =~ ^[Yy] ]]; then
+        echo ""
+        show_progress "Starting updated Documentation System..."
+        cd "$target_dir"
+        exec ./launch.sh
+    fi
+}
+
+# Run the existing installation check
+check_existing_installations
+
 # Ask for installation location with smart defaults
 echo -e "${YELLOW}📁 Choose your installation location:${NC}"
 echo ""
