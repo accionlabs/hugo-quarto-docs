@@ -226,8 +226,8 @@
         </div>
 
         <div class="install-section">
-            <h2>🎯 One-Click Installation & Updates (EASIEST!)</h2>
-            <p>Copy this command, paste in Terminal, press Enter - works for new installations AND updates:</p>
+            <h2>🎯 One-Click Installation & Updates</h2>
+            <p>One command works for everything - new installations AND updates:</p>
             
             <div class="install-command" onclick="copyToClipboard(this)">
                 curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash
@@ -237,35 +237,17 @@
                 📋 Copy Command
             </button>
             
-            <div class="requirements" style="background: #fff3cd; margin-top: 20px;">
-                <p><strong>📱 On Mac:</strong> Open Terminal (press Cmd+Space, type "Terminal", press Enter)</p>
-                <p><strong>✅ No downloads, no renaming files - just paste and run!</strong></p>
-                <p><strong>🧠 Smart Detection:</strong> Automatically finds and updates existing installations</p>
-            </div>
-        </div>
-
-        <div class="install-section" style="background: #e8f5e8; border: 2px solid #4caf50;">
-            <h2>🔄 Already Have It Installed? Use the Same Command!</h2>
-            <p>Great news! The web installer now handles both new installations AND updates automatically:</p>
-            
-            <div class="install-command" onclick="copyToClipboard(this)" style="background: #2e7d32;">
-                curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash
-            </div>
-            
-            <button class="copy-btn" onclick="copyInstallCommand()" style="background: #4caf50;">
-                📋 Copy Command
-            </button>
-            
             <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                <p><strong>✨ Smart Installation:</strong></p>
+                <p><strong>✨ Smart Installation Features:</strong></p>
                 <ul style="text-align: left; margin: 10px 0;">
-                    <li>🔍 <strong>Detects existing installations</strong> automatically</li>
-                    <li>🔄 <strong>Offers to update</strong> if system already exists</li>
-                    <li>💾 <strong>Creates backups</strong> before any changes</li>
+                    <li>🔍 <strong>Auto-detects existing installations</strong> in common locations</li>
+                    <li>🔄 <strong>Offers safe updates</strong> for existing systems</li>
+                    <li>💾 <strong>Creates automatic backups</strong> before any changes</li>
                     <li>📂 <strong>Preserves all your documents</strong> and settings</li>
-                    <li>🆕 <strong>Creates new installation</strong> if none exists</li>
+                    <li>🆕 <strong>Creates fresh installation</strong> if none exists</li>
                 </ul>
-                <p><small><strong>One command works for everything!</strong> No need to remember different commands.</small></p>
+                <p><strong>📱 On Mac:</strong> Open Terminal (Cmd+Space → "Terminal" → Enter)</p>
+                <p><strong>✅ No downloads, no file renaming - just paste and run!</strong></p>
             </div>
         </div>
 
@@ -362,13 +344,6 @@
             });
         }
         
-        function copyUpgradeCommand() {
-            const command = "curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash";
-            navigator.clipboard.writeText(command).then(function() {
-                showUpgradeCopyFeedback();
-            });
-        }
-        
         function showCopyFeedback() {
             const btn = document.querySelector('.copy-btn');
             const originalText = btn.textContent;
@@ -378,19 +353,6 @@
             setTimeout(() => {
                 btn.textContent = originalText;
                 btn.classList.remove('copied');
-            }, 2000);
-        }
-        
-        function showUpgradeCopyFeedback() {
-            const btns = document.querySelectorAll('.copy-btn');
-            const upgradeBtn = btns[1]; // Second button is the upgrade button
-            const originalText = upgradeBtn.textContent;
-            upgradeBtn.textContent = '✅ Copied!';
-            upgradeBtn.classList.add('copied');
-            
-            setTimeout(() => {
-                upgradeBtn.textContent = originalText;
-                upgradeBtn.classList.remove('copied');
             }, 2000);
         }
     </script>
