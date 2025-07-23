@@ -215,18 +215,20 @@ prepare_mermaid_for_quarto() {
 }
 
 process_quarto_files() {
-    log_info "Processing Quarto files..."
+    log_info "Processing Quarto files and Markdown files with exports..."
     
-    local qmd_count=0
+    local file_count=0
     local processed_count=0
     
-    # Find all .qmd files
-    while IFS= read -r -d '' qmd_file; do
-        ((qmd_count++))
+    # Find all .qmd and .md files that have quarto_exports
+    while IFS= read -r -d '' file; do
+        ((file_count++))
         
-        local relative_path="${qmd_file#$CONTENT_DIR/}"
-        local dir_name="$(dirname "$qmd_file")"
-        local base_name="$(basename "$qmd_file" .qmd)"
+        # Determine file type and extension
+        local file_ext="${file##*.}"
+        local relative_path="${file#$CONTENT_DIR/}"
+        local dir_name="$(dirname "$file")"
+        local base_name="$(basename "$file" .$file_ext)"
         
         log_info "Processing: $relative_path"
         
@@ -235,17 +237,24 @@ process_quarto_files() {
         mkdir -p "$temp_file_dir"
         
         # Copy file to temp directory
-        cp "$qmd_file" "$temp_file_dir/"
+        cp "$file" "$temp_file_dir/"
         
         # Change to temp directory for processing
         cd "$temp_file_dir"
         
         # Extract front matter to check for exports
-        local front_matter=$(awk '/^---$/{if(++n==2) exit} n>=1' "$base_name.qmd")
-        local exports=$(echo "$front_matter" | grep "quarto_exports:" | sed 's/quarto_exports: *\[\(.*\)\]/\1/' | tr -d '"[]')
+        local front_matter=$(awk '/^---$/{if(++n==2) exit} n>=1' "$base_name.$file_ext")
         
-        # Hugo will treat QMD files as markdown directly, so we only need to generate exports
-        log_success "  → QMD file will be processed by Hugo as markdown"
+        # Check if file has quarto_exports (skip files without it)
+        if ! echo "$front_matter" | grep -q "quarto_exports:"; then
+            continue
+        fi
+        
+        # Parse exports - support both array format [docx, pptx] and single format docx, pptx
+        local exports=$(echo "$front_matter" | grep "quarto_exports:" | sed -E 's/quarto_exports: *(\[([^\]]+)\]|([^[:space:]]+))/\2\3/' | tr -d '"[]' | sed 's/,/ /g')
+        
+        # Hugo will treat both QMD and MD files as markdown, we only need to generate exports
+        log_success "  → $file_ext file will be processed by Hugo as markdown"
         
         # Generate exports if specified
         if [ -n "$exports" ]; then
@@ -263,7 +272,7 @@ process_quarto_files() {
                     log_info "    → $format export missing, will generate"
                     needs_render=true
                     formats_to_render+=("$format")
-                elif [ "$qmd_file" -nt "$export_file" ]; then
+                elif [ "$file" -nt "$export_file" ]; then
                     log_info "    → $format export outdated, will regenerate"
                     needs_render=true
                     formats_to_render+=("$format")
@@ -276,11 +285,18 @@ process_quarto_files() {
             if [ "$needs_render" = true ]; then
                 log_info "  → Rendering needed formats: ${formats_to_render[*]}"
                 
+                # For .md files, create a temporary .qmd file for rendering
+                local render_file="$base_name.$file_ext"
+                if [ "$file_ext" = "md" ]; then
+                    cp "$base_name.md" "$base_name.qmd"
+                    render_file="$base_name.qmd"
+                fi
+                
                 # Prepare mermaid syntax for Quarto before rendering
-                prepare_mermaid_for_quarto "$base_name.qmd"
+                prepare_mermaid_for_quarto "$render_file"
                 
                 for format in "${formats_to_render[@]}"; do
-                    if quarto render "$base_name.qmd" --to "$format" --quiet; then
+                    if quarto render "$render_file" --to "$format" --quiet; then
                         # Copy export files back to content directory
                         if [ -f "$base_name.$format" ]; then
                             cp "$base_name.$format" "$dir_name/"
@@ -299,9 +315,14 @@ process_quarto_files() {
                 done
                 
                 # Revert mermaid syntax back to Hugo format after rendering
-                if grep -q '```{mermaid}' "$base_name.qmd"; then
-                    sed -i.tmp 's/```{mermaid}/```mermaid/g' "$base_name.qmd"
-                    rm -f "${base_name}.qmd.tmp"
+                if grep -q '```{mermaid}' "$render_file"; then
+                    sed -i.tmp 's/```{mermaid}/```mermaid/g' "$render_file"
+                    rm -f "${render_file}.tmp"
+                fi
+                
+                # Clean up temporary .qmd file if we created one from .md
+                if [ "$file_ext" = "md" ] && [ "$render_file" = "$base_name.qmd" ]; then
+                    rm -f "$base_name.qmd"
                 fi
             else
                 log_success "  → All exports up to date, skipping render"
@@ -312,9 +333,9 @@ process_quarto_files() {
         
         cd "$SCRIPT_DIR"
         
-    done < <(find "$CONTENT_DIR" -name "*.qmd" -type f -print0)
+    done < <(find "$CONTENT_DIR" \( -name "*.qmd" -o -name "*.md" \) -type f -print0)
     
-    log_success "Processed $processed_count/$qmd_count Quarto files"
+    log_success "Processed $processed_count/$file_count files with export capability"
 }
 
 # Build Hugo site

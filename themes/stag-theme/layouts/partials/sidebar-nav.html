@@ -57,7 +57,7 @@
                     <div class="nav-folder-header">
                         <a href="{{ .Permalink }}" class="folder-name-link{{ if eq .RelPermalink $currentPath }} current{{ end }}">
                             <span class="folder-icon">📁</span>
-                            <span class="folder-name">{{ .Title | humanize | title }}</span>
+                            <span class="folder-name">{{ if .Title }}{{ .Title | humanize | title }}{{ else }}{{ path.Base .File.Dir | humanize | title }}{{ end }}</span>
                             <span class="item-count">({{ len .Pages }})</span>
                         </a>
                     </div>
@@ -72,7 +72,7 @@
                 <div class="nav-file">
                     <a href="{{ .Permalink }}" class="nav-link{{ if eq .RelPermalink $currentPath }} current{{ end }}">
                         <span class="file-icon">📄</span>
-                        <span class="file-name">{{ .Title }}</span>
+                        <span class="file-name">{{ if .Title }}{{ .Title }}{{ else }}{{ path.Base .File.Path | strings.TrimSuffix (path.Ext .File.Path) | humanize | title }}{{ end }}</span>
                         {{ if .Date }}
                         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
                         {{ end }}
@@ -89,7 +89,7 @@
                         </button>
                         <a href="{{ .Permalink }}" class="folder-name-link{{ if eq .RelPermalink $currentPath }} current{{ end }}">
                             <span class="folder-icon">📁</span>
-                            <span class="folder-name">{{ .Title | humanize | title }}</span>
+                            <span class="folder-name">{{ if .Title }}{{ .Title | humanize | title }}{{ else }}{{ path.Base .File.Dir | humanize | title }}{{ end }}</span>
                             <span class="item-count">({{ len .Pages }})</span>
                         </a>
                     </div>
@@ -99,7 +99,7 @@
                         <li class="nav-file">
                             <a href="{{ .Permalink }}" class="nav-link{{ if eq .RelPermalink $currentPath }} current{{ end }}">
                                 <span class="file-icon">📄</span>
-                                <span class="file-name">{{ .Title }}</span>
+                                <span class="file-name">{{ if .Title }}{{ .Title }}{{ else }}{{ path.Base .File.Path | strings.TrimSuffix (path.Ext .File.Path) | humanize | title }}{{ end }}</span>
                                 {{ if .Date }}
                                 <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
                                 {{ end }}

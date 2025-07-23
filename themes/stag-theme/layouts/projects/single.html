@@ -1,6 +1,6 @@
 {{ define "main" }}
 <article class="content">
-    <header>
+    <header class="no-print">
         <h4>{{ .Title }}</h4>
         {{ if .Params.description }}
         <p class="description">{{ .Params.description }}</p>
@@ -26,13 +26,18 @@
     
     <!-- Export links -->
     {{ if .Params.quarto_exports }}
-    <div class="export-links">
+    <div class="export-links no-print">
         <h3>Download Formats:</h3>
-        {{ range .Params.quarto_exports }}
+        {{ $exportsList := .Params.quarto_exports }}
+        {{ if reflect.IsString $exportsList }}
+            {{ $exportsList = split $exportsList "," }}
+        {{ end }}
+        {{ range $exportsList }}
+        {{ $cleanFormat := . | strings.TrimSpace }}
         {{ $relativeDir := strings.TrimPrefix "/content/" (path.Dir $.File.Path) }}
-        {{ $exportFile := printf "/%s/%s.%s" $relativeDir (path.BaseName $.File.Path) . }}
-        <a href="{{ $exportFile }}" class="export-link export-{{ . }}" download>
-            <i class="icon-{{ . }}"></i> {{ . | upper }}
+        {{ $exportFile := printf "/%s/%s.%s" $relativeDir (path.BaseName $.File.Path) $cleanFormat }}
+        <a href="{{ $exportFile }}" class="export-link export-{{ $cleanFormat }}" download>
+            <i class="icon-{{ $cleanFormat }}"></i> {{ $cleanFormat | upper }}
         </a>
         {{ end }}
         <button onclick="window.print()" class="export-link export-print" type="button">

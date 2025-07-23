@@ -1179,6 +1179,11 @@ table tr:nth-child(even) {
         display: none !important;
     }
     
+    /* Hide front matter metadata and export links in print */
+    .no-print {
+        display: none !important;
+    }
+    
     /* Adjust main container for print */
     .main-container {
         margin: 0 !important;
