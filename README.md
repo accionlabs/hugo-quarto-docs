@@ -15,22 +15,30 @@ A modern documentation system that combines Hugo's fast static site generation w
 
 ## 🚀 Installation Options
 
-### 🖱️ For Non-Technical Users (EASIEST!)
+### 🎯 One-Click Installation (EASIEST!)
 
-**No terminal required! Just download and double-click:**
+**Copy this line, paste in Terminal, press Enter:**
 
-1. **[Download Easy Installer](https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/gui-install.sh)** (Right-click → Save Link As)
-2. **Rename** the downloaded file to `Easy Installer.command`
-3. **Double-click** the file to run it
-4. **Follow the simple on-screen instructions**
+```bash
+curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash
+```
 
-The installer will:
-- ✅ Set up everything automatically (no technical knowledge needed)
+**That's it!** The installer will:
+- ✅ Set up everything automatically (no downloads, no renaming)
 - ✅ Create desktop shortcuts you can double-click
-- ✅ Put your documents in an easy-to-find location
-- ✅ Include step-by-step guides for complete beginners
+- ✅ Put documents in Documents/Documentation System (easy to find)
+- ✅ Guide you through the entire process step-by-step
+- ✅ Work without any technical knowledge
 
-### 💻 For Technical Users (One Command)
+### 🖱️ Alternative: Download Method
+
+If you prefer to download first:
+
+1. **[Download Installer](https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/gui-install.sh)** (Right-click → Save Link As)
+2. **Rename** to `Easy Installer.command`
+3. **Double-click** to run
+
+### 💻 For Developers
 
 ```bash
 curl -sSL https://accionlabs.github.io/hugo-quarto-docs/install.sh | bash

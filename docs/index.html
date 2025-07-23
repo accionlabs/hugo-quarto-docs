@@ -226,18 +226,21 @@
         </div>
 
         <div class="install-section">
-            <h2>🚀 One-Command Installation</h2>
-            <p>Install everything you need with a single command:</p>
+            <h2>🎯 One-Click Installation (EASIEST!)</h2>
+            <p>Copy this command, paste in Terminal, press Enter:</p>
             
             <div class="install-command" onclick="copyToClipboard(this)">
-                curl -sSL https://accionlabs.github.io/hugo-quarto-docs/install.sh | bash
+                curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash
             </div>
             
             <button class="copy-btn" onclick="copyInstallCommand()">
                 📋 Copy Command
             </button>
             
-            <p><small>This will install Hugo, Quarto, and set up the documentation system locally</small></p>
+            <div class="requirements" style="background: #fff3cd; margin-top: 20px;">
+                <p><strong>📱 On Mac:</strong> Open Terminal (press Cmd+Space, type "Terminal", press Enter)</p>
+                <p><strong>✅ No downloads, no renaming files - just paste and run!</strong></p>
+            </div>
         </div>
 
         <div class="install-section" style="background: #e8f5e8; border: 2px solid #4caf50;">
@@ -342,7 +345,7 @@
         }
         
         function copyInstallCommand() {
-            const command = "curl -sSL https://accionlabs.github.io/hugo-quarto-docs/install.sh | bash";
+            const command = "curl -sSL https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/web-install.sh | bash";
             navigator.clipboard.writeText(command).then(function() {
                 showCopyFeedback();
             });
