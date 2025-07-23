@@ -29,7 +29,7 @@
     <div class="export-links no-print">
         <h3>Download Formats:</h3>
         {{ $exportsList := .Params.quarto_exports }}
-        {{ if reflect.IsString $exportsList }}
+        {{ if eq (printf "%T" $exportsList) "string" }}
             {{ $exportsList = split $exportsList "," }}
         {{ end }}
         {{ range $exportsList }}
