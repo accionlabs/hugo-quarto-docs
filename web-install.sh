@@ -117,7 +117,7 @@ chmod +x *.sh 2>/dev/null || true
 show_progress "Creating easy-to-use shortcuts..."
 
 # Create the main launcher
-cat > "$INSTALL_DIR/🚀 START DOCUMENTATION SYSTEM.command" << 'EOF'
+cat > "$INSTALL_DIR/🚀 Start.command" << 'EOF'
 #!/bin/bash
 cd "$(dirname "$0")"
 
@@ -130,7 +130,7 @@ echo "📂 Your documents: $(pwd)/content/"
 echo "🌐 Website will open at: http://localhost:1313"
 echo ""
 echo "💡 To edit documents:"
-echo "   • Double-click '📁 OPEN DOCUMENTS FOLDER.command'"
+echo "   • Double-click '📁 Documents.command'"
 echo "   • Or use Obsidian/VS Code shortcuts if available"
 echo ""
 echo "🔄 Refresh your browser after editing documents to see changes"
@@ -143,37 +143,37 @@ echo ""
 EOF
 
 # Create content folder opener
-cat > "$INSTALL_DIR/📁 OPEN DOCUMENTS FOLDER.command" << 'EOF'
+cat > "$INSTALL_DIR/📁 Documents.command" << 'EOF'
 #!/bin/bash
 cd "$(dirname "$0")"
 open ./content
 EOF
 
 # Create system stopper
-cat > "$INSTALL_DIR/⏹️  STOP DOCUMENTATION SYSTEM.command" << 'EOF'
+cat > "$INSTALL_DIR/⏹️ Stop.command" << 'EOF'
 #!/bin/bash
 echo "🛑 Stopping Documentation System..."
 pkill -f "hugo serve" 2>/dev/null || true
 pkill -f "launch.sh" 2>/dev/null || true
 echo "✅ Documentation System stopped"
 echo ""
-echo "💡 To start again, double-click '🚀 START DOCUMENTATION SYSTEM.command'"
+echo "💡 To start again, double-click '🚀 Start.command'"
 read -p "Press Enter to close..."
 EOF
 
 # Check for and create app-specific shortcuts
 if [ -d "/Applications/Obsidian.app" ]; then
-    cat > "$INSTALL_DIR/📝 OPEN IN OBSIDIAN.command" << 'EOF'
+    cat > "$INSTALL_DIR/📝 Obsidian.command" << 'EOF'
 #!/bin/bash
 cd "$(dirname "$0")"
 open -a "Obsidian" ./content
 EOF
-    chmod +x "$INSTALL_DIR/📝 OPEN IN OBSIDIAN.command"
+    chmod +x "$INSTALL_DIR/📝 Obsidian.command"
     show_success "Obsidian shortcut created"
 fi
 
 if [ -d "/Applications/Visual Studio Code.app" ] || command -v code &> /dev/null; then
-    cat > "$INSTALL_DIR/💻 OPEN IN VS CODE.command" << 'EOF'
+    cat > "$INSTALL_DIR/💻 VS Code.command" << 'EOF'
 #!/bin/bash
 cd "$(dirname "$0")"
 if command -v code &> /dev/null; then
@@ -182,7 +182,7 @@ else
     open -a "Visual Studio Code" ./content
 fi
 EOF
-    chmod +x "$INSTALL_DIR/💻 OPEN IN VS CODE.command"
+    chmod +x "$INSTALL_DIR/💻 VS Code.command"
     show_success "VS Code shortcut created"
 fi
 
@@ -191,19 +191,19 @@ chmod +x "$INSTALL_DIR/"*.command
 
 # Create comprehensive user guide
 show_progress "Creating user guide..."
-cat > "$INSTALL_DIR/📖 QUICK START GUIDE.md" << 'EOF'
+cat > "$INSTALL_DIR/📖 Quick Start.md" << 'EOF'
 # 📖 Quick Start Guide - Documentation System
 
 ## 🚀 Getting Started (3 Easy Steps)
 
 ### Step 1: Start the System
-**Double-click: `🚀 START DOCUMENTATION SYSTEM.command`**
+**Double-click: `🚀 Start.command`**
 - Wait for "Site will be available at: http://localhost:1313"
 - Your browser will open automatically
 - Leave the terminal window open while working
 
 ### Step 2: Access Your Documents  
-**Double-click: `📁 OPEN DOCUMENTS FOLDER.command`**
+**Double-click: `📁 Documents.command`**
 - This opens the folder where you create/edit documents
 - All your files go in the `content/` folder that opens
 
@@ -240,11 +240,11 @@ content/
 ```
 
 ## 💡 Daily Workflow
-1. **Double-click** `🚀 START DOCUMENTATION SYSTEM.command`
-2. **Double-click** `📁 OPEN DOCUMENTS FOLDER.command` 
+1. **Double-click** `🚀 Start.command`
+2. **Double-click** `📁 Documents.command` 
 3. **Edit your documents** in the content folder
 4. **Refresh your browser** to see changes
-5. **When done, double-click** `⏹️ STOP DOCUMENTATION SYSTEM.command`
+5. **When done, double-click** `⏹️ Stop.command`
 
 ## 🔄 For Documents You Want to Export to Word/PowerPoint
 - Use `.qmd` files instead of `.md`
@@ -270,7 +270,7 @@ show_success "User guide created"
 # Create desktop alias/shortcut if possible
 if [ -d "$HOME/Desktop" ]; then
     show_progress "Creating desktop shortcut..."
-    ln -sf "$INSTALL_DIR/🚀 START DOCUMENTATION SYSTEM.command" "$HOME/Desktop/🚀 Documentation System.command" 2>/dev/null || true
+    ln -sf "$INSTALL_DIR/🚀 Start.command" "$HOME/Desktop/🚀 Docs.command" 2>/dev/null || true
     show_success "Desktop shortcut created"
 fi
 
@@ -285,9 +285,9 @@ echo -e "${BLUE}📍 Location:${NC} $LOCATION_NAME/Documentation System"
 echo -e "${BLUE}📂 Your documents:${NC} $LOCATION_NAME/Documentation System/content/"
 echo ""
 echo -e "${YELLOW}🚀 To get started right now:${NC}"
-echo "   1. Double-click '🚀 START DOCUMENTATION SYSTEM.command'"
-echo "   2. Double-click '📁 OPEN DOCUMENTS FOLDER.command'"
-echo "   3. Read '📖 QUICK START GUIDE.md' for step-by-step instructions"
+echo "   1. Double-click '🚀 Start.command'"
+echo "   2. Double-click '📁 Documents.command'"
+echo "   3. Read '📖 Quick Start.md' for step-by-step instructions"
 echo ""
 echo -e "${GREEN}💡 Everything is ready - no technical knowledge required!${NC}"
 echo ""
@@ -307,7 +307,7 @@ case $choice in
         echo "🌐 Website will open at: http://localhost:1313"
         echo "📂 Edit documents in: $INSTALL_DIR/content/"
         echo ""
-        exec "$INSTALL_DIR/🚀 START DOCUMENTATION SYSTEM.command"
+        exec "$INSTALL_DIR/🚀 Start.command"
         ;;
     2)
         echo ""
@@ -318,6 +318,6 @@ case $choice in
         echo ""
         echo "✅ Installation complete!"
         echo "📍 Find your system at: $LOCATION_NAME/Documentation System"
-        echo "🚀 Start anytime by double-clicking '🚀 START DOCUMENTATION SYSTEM.command'"
+        echo "🚀 Start anytime by double-clicking '🚀 Start.command'"
         ;;
 esac

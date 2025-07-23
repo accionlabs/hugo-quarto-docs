@@ -111,7 +111,7 @@ APPLESCRIPT
     chmod +x *.sh 2>/dev/null
     
     # Create shortcuts
-    cat > "$INSTALL_DIR/🚀 Start Documentation System.command" << 'SHORTCUT'
+    cat > "$INSTALL_DIR/🚀 Start.command" << 'SHORTCUT'
 #!/bin/bash
 cd "$(dirname "$0")"
 echo "🚀 Starting Documentation System..."
@@ -121,7 +121,7 @@ echo ""
 ./launch.sh
 SHORTCUT
     
-    cat > "$INSTALL_DIR/📁 Open Documents Folder.command" << 'SHORTCUT'
+    cat > "$INSTALL_DIR/📁 Documents.command" << 'SHORTCUT'
 #!/bin/bash
 cd "$(dirname "$0")"
 open ./content

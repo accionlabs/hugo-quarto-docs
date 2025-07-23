@@ -113,7 +113,7 @@ chmod +x *.sh 2>/dev/null || true
 show_progress "Creating desktop shortcuts..."
 
 # Create launch script wrapper
-cat > "$INSTALL_DIR/Launch Documentation.command" << 'EOF'
+cat > "$INSTALL_DIR/🚀 Start.command" << 'EOF'
 #!/bin/bash
 cd "$(dirname "$0")"
 echo "🚀 Starting your documentation system..."
@@ -125,31 +125,31 @@ echo ""
 ./launch.sh
 EOF
 
-chmod +x "$INSTALL_DIR/Launch Documentation.command"
+chmod +x "$INSTALL_DIR/🚀 Start.command"
 
 # Create content folder opener
-cat > "$INSTALL_DIR/Open Content Folder.command" << EOF
+cat > "$INSTALL_DIR/📁 Documents.command" << EOF
 #!/bin/bash
 cd "$(dirname "\$0")"
 open ./content
 EOF
 
-chmod +x "$INSTALL_DIR/Open Content Folder.command"
+chmod +x "$INSTALL_DIR/📁 Documents.command"
 
 # Create Obsidian launcher if Obsidian is available
 if [ -d "/Applications/Obsidian.app" ]; then
-    cat > "$INSTALL_DIR/Open in Obsidian.command" << EOF
+    cat > "$INSTALL_DIR/📝 Obsidian.command" << EOF
 #!/bin/bash
 cd "$(dirname "\$0")"
 open -a "Obsidian" ./content
 EOF
-    chmod +x "$INSTALL_DIR/Open in Obsidian.command"
+    chmod +x "$INSTALL_DIR/📝 Obsidian.command"
     show_success "Obsidian shortcut created (Obsidian detected)"
 fi
 
 # Create VS Code launcher if VS Code is available
 if [ -d "/Applications/Visual Studio Code.app" ] || command -v code &> /dev/null; then
-    cat > "$INSTALL_DIR/Open in VS Code.command" << EOF
+    cat > "$INSTALL_DIR/💻 VS Code.command" << EOF
 #!/bin/bash
 cd "$(dirname "\$0")"
 if command -v code &> /dev/null; then
@@ -158,7 +158,7 @@ else
     open -a "Visual Studio Code" ./content
 fi
 EOF
-    chmod +x "$INSTALL_DIR/Open in VS Code.command"
+    chmod +x "$INSTALL_DIR/💻 VS Code.command"
     show_success "VS Code shortcut created"
 fi
 
@@ -167,16 +167,16 @@ show_success "Desktop shortcuts created successfully"
 # Create README for users
 show_progress "Creating user guide..."
 
-cat > "$INSTALL_DIR/📖 HOW TO USE.md" << 'EOF'
+cat > "$INSTALL_DIR/📖 Quick Start.md" << 'EOF'
 # 📖 How to Use Your Documentation System
 
 ## 🚀 Quick Start
 
 ### Double-click these files to get started:
-- **Launch Documentation.command** - Starts your website (opens in browser)
-- **Open Content Folder.command** - Opens your documents folder
-- **Open in Obsidian.command** - Opens documents in Obsidian (if installed)
-- **Open in VS Code.command** - Opens documents in VS Code (if installed)
+- **🚀 Start.command** - Starts your website (opens in browser)
+- **📁 Documents.command** - Opens your documents folder
+- **📝 Obsidian.command** - Opens documents in Obsidian (if installed)
+- **💻 VS Code.command** - Opens documents in VS Code (if installed)
 
 ### 📁 Your Important Folders:
 - **content/** - This is where you put all your documents
@@ -215,7 +215,7 @@ quarto_exports: ["docx", "pptx"]
 
 ## 🖥️ Using the Website
 
-1. Double-click **Launch Documentation.command**
+1. Double-click **🚀 Start.command**
 2. Wait for "Site will be available at: http://localhost:1313"
 3. Your browser will open automatically
 4. Edit documents in the content folder
@@ -248,9 +248,9 @@ echo ""
 echo -e "${BLUE}📍 Location:${NC} $INSTALL_DIR"
 echo ""
 echo -e "${YELLOW}🚀 To get started:${NC}"
-echo "   1. Double-click 'Launch Documentation.command'"
-echo "   2. Double-click 'Open Content Folder.command' to see your documents"
-echo "   3. Read '📖 HOW TO USE.md' for detailed instructions"
+echo "   1. Double-click '🚀 Start.command'"
+echo "   2. Double-click '📁 Documents.command' to see your documents"
+echo "   3. Read '📖 Quick Start.md' for detailed instructions"
 echo ""
 echo -e "${BLUE}💡 Pro tip:${NC} Bookmark this folder in Finder for easy access!"
 echo ""
@@ -269,8 +269,8 @@ if ask_user "Would you like to start the documentation system now? (y/n)" "y" | 
     echo "🔗 Your website will open at: http://localhost:1313"
     echo "📁 Edit documents in: $INSTALL_DIR/content"
     echo ""
-    exec "$INSTALL_DIR/Launch Documentation.command"
+    exec "$INSTALL_DIR/🚀 Start.command"
 fi
 
 echo ""
-show_success "Setup complete! You can start anytime by double-clicking 'Launch Documentation.command'"
+show_success "Setup complete! You can start anytime by double-clicking '🚀 Start.command'"

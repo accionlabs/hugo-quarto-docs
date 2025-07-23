@@ -80,15 +80,15 @@ After installation, your `my-documentation` folder will contain:
 
 ## 🚀 Double-Click Files (These are your shortcuts!)
 
-- **Launch Documentation.command** 
+- **🚀 Start.command** 
   - *What it does*: Starts your website
   - *When to use*: Every time you want to work on documents
 
-- **Open Content Folder.command**
+- **📁 Documents.command**
   - *What it does*: Opens the folder where you put your documents  
   - *When to use*: When you want to add or organize documents
 
-- **Open in Obsidian.command** (if you have Obsidian)
+- **📝 Obsidian.command** (if you have Obsidian)
   - *What it does*: Opens your documents in the Obsidian app
   - *When to use*: For a beautiful writing experience
 
@@ -107,7 +107,7 @@ After installation, your `my-documentation` folder will contain:
 
 ## Creating a Simple Document
 
-1. **Double-click "Open Content Folder.command"**
+1. **Double-click "📁 Documents.command"**
 2. **Go into the "projects" folder**
 3. **Right-click in empty space** and choose "New Folder"
 4. **Name your folder**: `my-first-project` (no spaces, use hyphens)
@@ -145,7 +145,7 @@ This is my first document in the system!
 
 ## Viewing Your Document
 
-1. **Double-click "Launch Documentation.command"**
+1. **Double-click "🚀 Start.command"**
 2. **Wait for your browser to open** (it will show http://localhost:1313)
 3. **Click "Projects"** in the navigation
 4. **Find your project** and click on it
@@ -201,9 +201,9 @@ Your proposal content here...
 
 ## Every time you want to work on documents:
 
-1. **Double-click "Launch Documentation.command"**
+1. **Double-click "🚀 Start.command"**
 2. **Wait for browser to open**
-3. **Double-click "Open Content Folder.command"** (opens in a new window)
+3. **Double-click "📁 Documents.command"** (opens in a new window)
 4. **Edit your documents** in the content folder
 5. **Refresh your browser** to see changes
 
