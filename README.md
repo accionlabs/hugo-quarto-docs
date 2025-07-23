@@ -13,26 +13,51 @@ A modern documentation system that combines Hugo's fast static site generation w
 - 💬 **Collaboration**: Inline comments and version control
 - 📱 **Mobile Ready**: Full-screen mobile navigation for easy access
 
-## 🚀 One-Command Installation
+## 🚀 Installation Options
 
-**For non-technical users - just copy and paste this command:**
+### 🖱️ For Non-Technical Users (EASIEST!)
+
+**No terminal required! Just download and double-click:**
+
+1. **[Download Easy Installer](https://raw.githubusercontent.com/accionlabs/hugo-quarto-docs/main/gui-install.sh)** (Right-click → Save Link As)
+2. **Rename** the downloaded file to `Easy Installer.command`
+3. **Double-click** the file to run it
+4. **Follow the simple on-screen instructions**
+
+The installer will:
+- ✅ Set up everything automatically (no technical knowledge needed)
+- ✅ Create desktop shortcuts you can double-click
+- ✅ Put your documents in an easy-to-find location
+- ✅ Include step-by-step guides for complete beginners
+
+### 💻 For Technical Users (One Command)
 
 ```bash
 curl -sSL https://accionlabs.github.io/hugo-quarto-docs/install.sh | bash
 ```
 
-This will automatically:
-- ✅ Install Hugo (static site generator)
-- ✅ Install Quarto (document processor)  
-- ✅ Install Pandoc (for better table conversion)
-- ✅ Download and set up the documentation system
-- ✅ Create sample content to get you started
-- ✅ Create launch shortcuts
+## 📁 Finding Your Documents After Installation
 
-**After installation:**
-1. Navigate to the directory: `cd ~/hugo-quarto-docs`
-2. Start the system: `./launch.sh` or `hugo serve`
-3. Open your browser: `http://localhost:1313`
+### Non-Technical Installation:
+- **Location**: `Documents/my-documentation/content/`
+- **Quick access**: Double-click "Open Content Folder.command"
+
+### Technical Installation:
+- **Location**: `~/hugo-quarto-docs/content/`
+- **Command**: Navigate with `cd ~/hugo-quarto-docs`
+- **Start system**: `./launch.sh` or `hugo serve`
+- **View site**: Open `http://localhost:1313`
+
+### 🗂️ Folder Structure:
+```
+content/
+├── private/          # Your personal notes (not shared)
+├── projects/         # Client work and project documents  
+├── shared/          # Team knowledge base and resources
+└── assets/          # Images, files, and exports
+```
+
+**💡 Pro tip**: Bookmark the content folder in Finder for easy access!
 
 ## 🔄 Staying Updated
 
