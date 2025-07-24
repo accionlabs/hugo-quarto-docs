@@ -44,29 +44,47 @@ else
     
     # Simple polling approach for Windows and systems without file watchers
     (
-        # Track last modification time
-        LAST_CHECK_FILE="/tmp/quarto_last_check_$$"
-        date +%s > "$LAST_CHECK_FILE" 2>/dev/null || echo "0" > "$LAST_CHECK_FILE"
+        # Store checksums of files with quarto_exports instead of timestamps
+        CHECKSUM_FILE="/tmp/quarto_checksums_$$"
+        
+        # Function to generate checksums of relevant files
+        generate_checksums() {
+            find content/ \( -name "*.qmd" -o -name "*.md" \) -exec grep -l "quarto_exports:" {} \; 2>/dev/null | \
+            while read -r file; do
+                if [ -f "$file" ]; then
+                    # Use modification time + file size as a simple checksum
+                    stat -f "%N %m %z" "$file" 2>/dev/null || stat -c "%n %Y %s" "$file" 2>/dev/null
+                fi
+            done | sort
+        }
+        
+        # Generate initial checksums
+        generate_checksums > "$CHECKSUM_FILE"
         
         while true; do
-            sleep 2
+            sleep 3
             
-            # Find files newer than last check
-            LAST_CHECK=$(cat "$LAST_CHECK_FILE" 2>/dev/null || echo "0")
+            # Generate new checksums
+            NEW_CHECKSUM_FILE="/tmp/quarto_checksums_new_$$"
+            generate_checksums > "$NEW_CHECKSUM_FILE"
             
-            # Use find with -newer if supported, otherwise fallback to basic check
-            if find content/ -name "*.qmd" -o -name "*.md" -newer "$LAST_CHECK_FILE" 2>/dev/null | grep -q .; then
-                echo "🔄 Quarto file changes detected, regenerating exports..."
-                ./build.sh >/dev/null 2>&1
-                date +%s > "$LAST_CHECK_FILE" 2>/dev/null || echo "$(date +%s)" > "$LAST_CHECK_FILE"
-            elif [ "$LAST_CHECK" = "0" ]; then
-                # First run - create the timestamp file
-                date +%s > "$LAST_CHECK_FILE" 2>/dev/null || echo "$(date +%s)" > "$LAST_CHECK_FILE"
+            # Compare checksums
+            if ! cmp -s "$CHECKSUM_FILE" "$NEW_CHECKSUM_FILE" 2>/dev/null; then
+                # Find which files changed
+                CHANGED_FILES=$(comm -13 <(sort "$CHECKSUM_FILE") <(sort "$NEW_CHECKSUM_FILE") | cut -d' ' -f1)
+                if [ -n "$CHANGED_FILES" ]; then
+                    echo "🔄 Quarto file changes detected: $(echo "$CHANGED_FILES" | tr '\n' ' ')"
+                    echo "   Regenerating exports..."
+                    ./build.sh >/dev/null 2>&1
+                fi
+                cp "$NEW_CHECKSUM_FILE" "$CHECKSUM_FILE"
             fi
+            
+            rm -f "$NEW_CHECKSUM_FILE"
         done
         
         # Cleanup
-        rm -f "$LAST_CHECK_FILE"
+        rm -f "$CHECKSUM_FILE"
     ) &
     WATCHER_PID=$!
 fi
